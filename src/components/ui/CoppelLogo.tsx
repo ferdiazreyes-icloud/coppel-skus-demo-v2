@@ -13,10 +13,10 @@ export default function CoppelLogo({ variant = 'white', className = '' }: Coppel
 
   return (
     <div className={`flex items-center gap-2.5 ${className}`}>
-      {/* Three yellow dots — ascending size */}
-      <div className="flex items-end gap-[5px]">
-        <span className="w-[14px] h-[14px] rounded-full bg-coppel-yellow" />
-        <span className="w-[18px] h-[18px] rounded-full bg-coppel-yellow" />
+      {/* Three yellow dots — small to large, vertically centered */}
+      <div className="flex items-center gap-[5px]">
+        <span className="w-[12px] h-[12px] rounded-full bg-coppel-yellow" />
+        <span className="w-[16px] h-[16px] rounded-full bg-coppel-yellow" />
         <span className="w-[22px] h-[22px] rounded-full bg-coppel-yellow" />
       </div>
       {/* Text */}

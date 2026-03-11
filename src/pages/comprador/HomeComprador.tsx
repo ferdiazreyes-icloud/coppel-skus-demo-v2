@@ -1,10 +1,125 @@
+import { useNavigate } from 'react-router-dom'
+import { Lock, Truck, ChevronLeft, ChevronRight } from 'lucide-react'
+import { useAuthStore } from '../../stores/useAuthStore'
+import Breadcrumb from '../../components/layout/Breadcrumb'
+
+const bannerImages = [
+  'https://placehold.co/900x300/1A3C9E/F5C518?text=Coppel+Proveedores',
+]
+
+const quickActions = [
+  { icon: Lock, label: 'Propuestas de\nSKU\'s', to: '/comprador/propuestas/sup-001' },
+  { icon: Truck, label: 'Alta de\nproveedores', to: '/comprador/alta-proveedores' },
+]
+
+const featureCards = [
+  {
+    image: 'https://placehold.co/400x200/e8edfa/1A3C9E?text=Almacen',
+    title: 'Generar Invitación',
+    description: 'Invita prospectos a registrarse',
+    buttonLabel: 'Generar QR',
+    to: '#',
+  },
+  {
+    image: 'https://placehold.co/400x200/e8edfa/1A3C9E?text=Prospectos',
+    title: 'Alta prospectos',
+    description: 'Gestión completa de prospectos',
+    buttonLabel: 'Ir a listado de prospectos',
+    to: '#',
+  },
+  {
+    image: 'https://placehold.co/400x200/e8edfa/1A3C9E?text=SKUs',
+    title: 'Propuestas y SKU\'s',
+    description: 'Revisa y gestiona tus propuestas...',
+    buttonLabel: 'Ver propuestas y SKU\'s',
+    to: '/comprador/propuestas/sup-001',
+  },
+]
+
 export default function HomeComprador() {
+  const user = useAuthStore((s) => s.user)
+  const navigate = useNavigate()
+
   return (
-    <div className="p-6">
-      <h1 className="font-sans text-2xl font-semibold text-coppel-navy">
-        Home Comprador
-      </h1>
-      <p className="text-text-muted mt-2">Sprint 2 — Pendiente de implementar</p>
+    <div>
+      <Breadcrumb items={[{ label: 'Inicio' }]} />
+
+      <div className="px-6 pb-10">
+        {/* Greeting */}
+        <h1 className="font-sans text-xl font-semibold text-text-primary italic mb-6">
+          Bienvenida, {user?.name}
+        </h1>
+
+        {/* Banner Carousel */}
+        <div className="relative rounded-lg overflow-hidden mb-4">
+          <img
+            src={bannerImages[0]}
+            alt="Banner Coppel"
+            className="w-full h-[250px] object-cover"
+          />
+        </div>
+
+        {/* Carousel dots */}
+        <div className="flex justify-center gap-2 mb-8">
+          <span className="w-2.5 h-2.5 rounded-full bg-coppel-blue" />
+          <span className="w-2.5 h-2.5 rounded-full bg-border-dark" />
+          <span className="w-2.5 h-2.5 rounded-full bg-border-dark" />
+          <span className="w-2.5 h-2.5 rounded-full bg-border-dark" />
+          <span className="w-2.5 h-2.5 rounded-full bg-border-dark" />
+        </div>
+
+        {/* Quick Actions */}
+        <div className="flex justify-center gap-8 mb-10">
+          {quickActions.map((action) => (
+            <button
+              key={action.label}
+              onClick={() => navigate(action.to)}
+              className="flex flex-col items-center gap-2 group"
+            >
+              <div className="w-14 h-14 rounded-full bg-coppel-blue flex items-center justify-center group-hover:bg-coppel-blue-hover transition-colors">
+                <action.icon className="w-6 h-6 text-white" />
+              </div>
+              <span className="text-xs text-text-primary text-center font-medium whitespace-pre-line">
+                {action.label}
+              </span>
+            </button>
+          ))}
+        </div>
+
+        {/* Feature Cards */}
+        <div className="relative">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {featureCards.map((card) => (
+              <div
+                key={card.title}
+                className="bg-bg-card rounded-lg overflow-hidden border border-border shadow-sm"
+              >
+                <div className="h-40 overflow-hidden">
+                  <img src={card.image} alt={card.title} className="w-full h-full object-cover" />
+                </div>
+                <div className="p-5">
+                  <h3 className="font-sans text-base font-bold text-text-primary">{card.title}</h3>
+                  <p className="text-sm text-text-secondary mt-1">{card.description}</p>
+                  <button
+                    onClick={() => navigate(card.to)}
+                    className="mt-4 w-full h-10 rounded-pill border-2 border-coppel-blue text-coppel-blue text-sm font-semibold hover:bg-coppel-blue hover:text-white transition-colors"
+                  >
+                    {card.buttonLabel}
+                  </button>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* Nav arrows */}
+          <button className="absolute -left-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-bg-card border border-border shadow flex items-center justify-center hover:bg-bg-hover transition-colors">
+            <ChevronLeft className="w-5 h-5 text-text-primary" />
+          </button>
+          <button className="absolute -right-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-bg-card border border-border shadow flex items-center justify-center hover:bg-bg-hover transition-colors">
+            <ChevronRight className="w-5 h-5 text-text-primary" />
+          </button>
+        </div>
+      </div>
     </div>
   )
 }
