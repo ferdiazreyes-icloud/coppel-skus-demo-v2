@@ -1,6 +1,7 @@
 import { Globe, Bell, Menu } from 'lucide-react'
 import { useAuthStore } from '../../stores/useAuthStore'
 import { useNavigate } from 'react-router-dom'
+import CoppelLogo from '../ui/CoppelLogo'
 
 export default function Navbar() {
   const { user, clearRole } = useAuthStore()
@@ -14,13 +15,8 @@ export default function Navbar() {
   return (
     <header className="h-[112px] bg-coppel-blue flex items-center px-8 shrink-0">
       {/* Logo */}
-      <div className="flex items-center gap-2 min-w-[250px]">
-        <div className="flex gap-1">
-          <span className="w-2.5 h-2.5 rounded-full bg-coppel-yellow" />
-          <span className="w-2.5 h-2.5 rounded-full bg-coppel-yellow" />
-          <span className="w-2.5 h-2.5 rounded-full bg-coppel-yellow" />
-        </div>
-        <span className="font-sans text-3xl font-bold text-white">Coppel</span>
+      <div className="min-w-[250px]">
+        <CoppelLogo variant="white" />
       </div>
 
       {/* Spacer */}

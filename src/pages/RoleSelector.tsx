@@ -1,6 +1,7 @@
 import { useNavigate } from 'react-router-dom'
 import { ShoppingCart, Truck } from 'lucide-react'
 import { useAuthStore } from '../stores/useAuthStore'
+import CoppelLogo from '../components/ui/CoppelLogo'
 
 export default function RoleSelector() {
   const navigate = useNavigate()
@@ -15,13 +16,8 @@ export default function RoleSelector() {
     <div className="min-h-screen bg-bg-page flex items-center justify-center p-6">
       <div className="w-full max-w-[800px]">
         {/* Logo */}
-        <div className="flex items-center justify-center gap-2 mb-12">
-          <div className="flex gap-1">
-            <span className="w-3 h-3 rounded-full bg-coppel-yellow" />
-            <span className="w-3 h-3 rounded-full bg-coppel-yellow" />
-            <span className="w-3 h-3 rounded-full bg-coppel-yellow" />
-          </div>
-          <span className="font-sans text-4xl font-bold text-coppel-navy">Coppel</span>
+        <div className="flex justify-center mb-12">
+          <CoppelLogo variant="navy" />
         </div>
 
         <h1 className="font-sans text-2xl font-semibold text-coppel-navy text-center mb-2">
