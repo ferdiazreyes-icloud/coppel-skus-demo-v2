@@ -1,73 +1,158 @@
-# React + TypeScript + Vite
+# SGC Coppel — SKU's Demo v2
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+> Demo funcional del portal SGC (Sistema de Gestión Comercial) de Coppel para gestionar propuestas y alta de SKU's entre compradores internos y proveedores externos.
 
-Currently, two official plugins are available:
+**Version:** 0.4.0 (Sprint 4 complete)
+**Figma reference:** [SKU's_SGC](https://www.figma.com/design/gYTM6PwHzQPGycic3kdIE6/SKU-s_SGC)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## React Compiler
+## Tech Stack
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+| Technology | Purpose |
+|-----------|---------|
+| React 19 + Vite | UI framework + dev server |
+| TypeScript | Type safety |
+| Tailwind CSS v4 | Pixel-perfect styling with design tokens |
+| React Router v7 | Client-side routing with nested layouts |
+| Zustand | Global state (auth, SKU form, notifications) |
+| Lucide React | Icon library |
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## What's Implemented
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+### Sprint 0: Project Setup
+- [x] Vite + React 19 + TypeScript scaffold
+- [x] Tailwind CSS v4 with Coppel design tokens (`@theme` block)
+- [x] Zustand stores: auth, SKU form, notifications
+- [x] Type system: Product, ProposalStatus, SkuFormData, SKU_TABS
+- [x] Utility functions: formatCurrency, formatPercent
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+### Sprint 1: Layout + UI Components (20+ components)
+- [x] **Layout:** Navbar (112px), Footer, Breadcrumb, PageLayout (max 1440px)
+- [x] **Forms:** Button (5 variants), Input, Select, Checkbox, RadioGroup, Toggle, Textarea, NumberInput, DatePicker, DateRangePicker, FileUpload
+- [x] **Data:** Table (sortable, selectable), Pagination, Badge (status colors)
+- [x] **Navigation:** Tabs (completion dots), Modal (sm/md/lg)
+- [x] **Display:** Avatar, ImageCarousel, ActionCard, ProductCard, CoppelLogo
+- [x] **Shared:** FormSection (accordion + save), ProductHeader, FilterSidebar
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+### Sprint 2: Home Pages + Role Selector
+- [x] **RoleSelector** — Comprador / Proveedor entry screen
+- [x] **HomeComprador** — Banner, quick actions, feature cards
+- [x] **HomeProveedor** — Banner, quick actions, solicitudes, account cards
+
+### Sprint 3: Comprador — Proposal Listing & Evaluation
+- [x] **ListadoPropuestas** — Two-column layout: sidebar filters + product card list with pagination
+- [x] **EvaluacionPropuesta** — Product detail + sample request form (specs, address, dates, checkboxes)
+- [x] Mock data: 10 products (Mattel dolls, Prinsel), 2 solicitudes
+
+### Sprint 4: Comprador — SKU Registration (8-tab form)
+- [x] **PropuestasEnAlta** — Category tabs + sortable product table + assign supplier modal
+- [x] **AltaSkuLayout** — ProductHeader + tab navigation with completion indicators
+- [x] **Tab 1 - Info General** — Product data, model, origin, SAT, assembly time, dimensions, included items
+- [x] **Tab 2 - Estrategia Comercial** — Purchase conditions, pre-sale, warranty, 12-month discount table
+- [x] **Tab 3 - Datos por Color** — Color accordions, GTIN codes, sales forecast, image upload
+- [x] **Tab 4 - Atributos** — Dual-column attribute table, label description with priority ordering
+- [x] **Tab 5 - Datos Logísticos** — CEDIS table, packaging dimensions, pallet config
+- [x] **Tab 6 - Costos y Precios** — Costs, taxes, utility factors, prices, surcharges, commissions
+- [x] **Tab 7 - Admin Stock** — Store format stock grid, warehouse distribution percentages
+- [x] **Tab 8 - Configuración** — Forecasts, model-color visibility, delivery/labeling checkboxes
+
+---
+
+## What's Pending
+
+### Sprint 5: Proveedor Flow — Solicitudes & Upload
+- [ ] HistorialSolicitudes — List with status badges
+- [ ] SolicitudDetalle — Buyer specs + reference images
+- [ ] CargaIndividual — Product type form with dynamic fields
+- [ ] CargaMasiva — Template download + drag & drop upload + preview table
+
+### Sprint 6: Cross-role Integration
+- [ ] Notifications between roles
+- [ ] Workflow state machine (status transitions)
+- [ ] Connect comprador and proveedor flows
+
+### Sprint 7: Polish & Deploy
+- [ ] Responsive adjustments
+- [ ] Loading/error states
+- [ ] Deploy to Railway
+
+### Known Limitations
+- Sidebar filters in ListadoPropuestas are visual only (no actual filtering)
+- Form data in SKU tabs is not persisted to mock backend
+- useProposalStore not yet created
+- mockProveedores.ts not yet created (supplier data is inline)
+
+---
+
+## Routes
+
+| Route | Page | Role |
+|-------|------|------|
+| `/` | RoleSelector | — |
+| `/comprador` | HomeComprador | Comprador |
+| `/comprador/propuestas/:proveedorId` | ListadoPropuestas | Comprador |
+| `/comprador/propuestas/:proveedorId/:productoId/evaluar` | EvaluacionPropuesta | Comprador |
+| `/comprador/alta-skus` | PropuestasEnAlta | Comprador |
+| `/comprador/alta-skus/:productoId/:tab` | AltaSkuLayout (8 tabs) | Comprador |
+| `/proveedor` | HomeProveedor | Proveedor |
+
+---
+
+## How to Run
+
+```bash
+# Install dependencies
+npm install
+
+# Dev server (http://localhost:5173)
+npm run dev
+
+# Type check
+npx tsc --noEmit
+
+# Production build
+npm run build
+
+# Preview production build
+npm run preview
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+---
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## Project Structure
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
 ```
+src/
+├── components/
+│   ├── layout/          # Navbar, Footer, Breadcrumb, PageLayout
+│   ├── shared/          # FormSection, ProductHeader, FilterSidebar
+│   └── ui/              # 20+ reusable UI components
+├── data/                # Mock products, catalog data
+├── pages/
+│   ├── comprador/       # Comprador pages
+│   │   └── tabs/        # 8 SKU form tabs
+│   └── proveedor/       # Proveedor pages
+├── stores/              # Zustand stores (auth, SKU form, notifications)
+├── types/               # TypeScript interfaces
+└── utils/               # Formatting helpers
+```
+
+---
+
+## Design Reference
+
+All screens are based on the Figma file documented in `FIGMA_REFERENCE.md`. Key design tokens:
+
+| Token | Value |
+|-------|-------|
+| Coppel Blue | `#1A3C9E` |
+| Coppel Navy | `#081754` |
+| Coppel Yellow | `#F5C518` |
+| Background | `#F3F3F3` |
+| Font (headings) | Poppins |
+| Font (body) | Source Sans 3 |
+| Navbar height | 112px |
+| Content max-width | 1440px |

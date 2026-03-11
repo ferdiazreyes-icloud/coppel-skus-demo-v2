@@ -217,13 +217,13 @@ src/
 **Objetivo:** Repo listo para desarrollar con todos los tokens configurados.
 
 - [ ] Inicializar proyecto con Vite + React + TypeScript
-- [ ] Instalar y configurar Tailwind CSS v4 con tokens Coppel
-- [ ] Instalar dependencias: React Router, Zustand, Lucide React, React Hook Form
-- [ ] Copiar `FIGMA_REFERENCE.md` al repo
-- [ ] Crear estructura de carpetas vacía
-- [ ] Configurar ESLint + Prettier
-- [ ] Configurar deploy en Railway
-- [ ] Commit inicial
+- [x] Instalar y configurar Tailwind CSS v4 con tokens Coppel
+- [x] Instalar dependencias: React Router, Zustand, Lucide React, React Hook Form
+- [x] Copiar `FIGMA_REFERENCE.md` al repo
+- [x] Crear estructura de carpetas vacía
+- [x] Configurar ESLint + Prettier
+- [x] Configurar deploy en Railway
+- [x] Commit inicial
 
 **Entregable:** `npm run dev` funciona con página en blanco.
 
@@ -233,26 +233,26 @@ src/
 **Objetivo:** Todos los componentes compartidos, pixel-perfect.
 
 **Prioridad 1 — Layout (comparar constantemente con Figma):**
-- [ ] `Navbar.tsx` — Logo Coppel (3 puntos amarillos + texto), búsqueda, idioma, notificaciones, avatar. Altura exacta: 112px
-- [ ] `Footer.tsx` — Fondo azul oscuro, 5 columnas, términos y condiciones, botón "Ir al inicio"
-- [ ] `Breadcrumb.tsx` — Con icono 🏠, separadores ">", links azules
-- [ ] `PageLayout.tsx` — Navbar + Breadcrumb + content (max-width 1440px, padding 24px) + Footer
+- [x] `Navbar.tsx` — Logo Coppel (3 puntos amarillos + texto), búsqueda, idioma, notificaciones, avatar. Altura exacta: 112px
+- [x] `Footer.tsx` — Fondo azul oscuro, 5 columnas, términos y condiciones, botón "Ir al inicio"
+- [x] `Breadcrumb.tsx` — Con icono 🏠, separadores ">", links azules
+- [x] `PageLayout.tsx` — Navbar + Breadcrumb + content (max-width 1440px, padding 24px) + Footer
 
 **Prioridad 2 — Componentes UI:**
-- [ ] `Button.tsx` — height 48px, border-radius pill, variantes primary/outline/ghost
-- [ ] `Input.tsx` — height 40px, label encima, borde gris, focus azul, asterisco rojo para required
-- [ ] `Select.tsx` — Mismo estilo que Input con chevron
-- [ ] `Checkbox.tsx`, `RadioGroup.tsx`, `Toggle.tsx`
-- [ ] `Badge.tsx` / `StatusBadge.tsx` — Con colores exactos por estatus
-- [ ] `Table.tsx` + `Pagination.tsx` — Headers azul oscuro, sorting icons, checkboxes
-- [ ] `Modal.tsx` — Overlay semi-transparente, card centrada, X para cerrar
-- [ ] `Tabs.tsx` — Horizontal con indicadores ● verde/gris, tab activo con underline
-- [ ] `ActionCard.tsx` — Imagen arriba, título bold, descripción, botón outline
-- [ ] `ProductCard.tsx` — Thumbnail izquierda, datos en tabla horizontal, badge estatus
-- [ ] `FileUpload.tsx` — Drag & drop con icono, texto "Arrastra y suelta" y "Selecciona tus archivos"
-- [ ] `DatePicker.tsx`, `NumberInput.tsx`, `Textarea.tsx`
-- [ ] `ImageCarousel.tsx` — Con dots y flechas
-- [ ] `Accordion.tsx` / `FormSection.tsx` — Expandible con título, toggle info, botón guardar
+- [x] `Button.tsx` — height 48px, border-radius pill, variantes primary/outline/ghost
+- [x] `Input.tsx` — height 40px, label encima, borde gris, focus azul, asterisco rojo para required
+- [x] `Select.tsx` — Mismo estilo que Input con chevron
+- [x] `Checkbox.tsx`, `RadioGroup.tsx`, `Toggle.tsx`
+- [x] `Badge.tsx` / `StatusBadge.tsx` — Con colores exactos por estatus
+- [x] `Table.tsx` + `Pagination.tsx` — Headers azul oscuro, sorting icons, checkboxes
+- [x] `Modal.tsx` — Overlay semi-transparente, card centrada, X para cerrar
+- [x] `Tabs.tsx` — Horizontal con indicadores ● verde/gris, tab activo con underline
+- [x] `ActionCard.tsx` — Imagen arriba, título bold, descripción, botón outline
+- [x] `ProductCard.tsx` — Thumbnail izquierda, datos en tabla horizontal, badge estatus
+- [x] `FileUpload.tsx` — Drag & drop con icono, texto "Arrastra y suelta" y "Selecciona tus archivos"
+- [x] `DatePicker.tsx`, `NumberInput.tsx`, `Textarea.tsx`
+- [x] `ImageCarousel.tsx` — Con dots y flechas
+- [x] `Accordion.tsx` / `FormSection.tsx` — Expandible con título, toggle info, botón guardar
 
 **Entregable:** Storybook mental — cada componente renderiza igual que en Figma.
 
@@ -261,14 +261,14 @@ src/
 ### Sprint 2: Homes + Selector de Rol (1 sesión)
 **Objetivo:** Las pantallas de entrada del portal.
 
-- [ ] `RoleSelector.tsx` — Pantalla simple: "Entrar como Comprador" / "Entrar como Proveedor"
-- [ ] `useAuthStore.ts` — Store con rol y usuario actual
-- [ ] `HomeComprador.tsx`:
+- [x] `RoleSelector.tsx` — Pantalla simple: "Entrar como Comprador" / "Entrar como Proveedor"
+- [x] `useAuthStore.ts` — Store con rol y usuario actual
+- [x] `HomeComprador.tsx`:
   - Saludo "Bienvenida, Juanita Solis"
   - Carousel de imágenes Coppel (placeholder images)
   - Accesos rápidos: Propuestas de SKU's, Alta de proveedores
   - Cards: Generar Invitación, Alta prospectos, Propuestas y SKU's
-- [ ] `HomeProveedor.tsx`:
+- [x] `HomeProveedor.tsx`:
   - Saludo "Bienvenido, [Proveedor]"
   - Carousel "Descubre los beneficios..."
   - Accesos rápidos: Mi perfil, Catálogos, Mis solicitudes, Documentos
@@ -282,22 +282,22 @@ src/
 ### Sprint 3: Flujo Comprador — Listado y Evaluación (1-2 sesiones)
 **Objetivo:** El comprador puede ver, filtrar y evaluar propuestas.
 
-- [ ] `mockProducts.ts` — 10+ productos con datos realistas (Mattel, muñecas, precios reales)
-- [ ] `mockProveedores.ts` — 3+ proveedores
-- [ ] `ListadoPropuestas.tsx`:
+- [x] `mockProducts.ts` — 10+ productos con datos realistas (Mattel, muñecas, precios reales)
+- [ ] `mockProveedores.ts` — 3+ proveedores (pendiente, se usan datos inline)
+- [x] `ListadoPropuestas.tsx`:
   - Layout 2 columnas (sidebar 333px + contenido)
   - Sidebar: 3 dropdowns (Categoría, Clase, Familia) + Descargar plantilla + Drag&drop + Filtrar por (Precio, Margen, Marca con checkboxes, Color)
   - Header: nombre proveedor + solicitud ID + ordenar por + toggle vista/lista
   - Cards de producto con: checkbox, thumbnail, nombre, marca, tipo proveedor, modelo, precio, costo, margen, badge estatus, ficha técnica link, toggle carga masiva
   - Paginación
-- [ ] `EvaluacionPropuesta.tsx`:
+- [x] `EvaluacionPropuesta.tsx`:
   - Card producto (imagen + datos + cantidad +/-)
   - Especificaciones (textarea)
   - Dirección de entrega (botón con icono ubicación)
   - Rango de entrega (date range picker)
   - 3 checkboxes (planeación, info para alta, quién recibe)
   - Botón Continuar
-- [ ] `useProposalStore.ts` — Estado de propuestas y pre-selecciones
+- [ ] `useProposalStore.ts` — Estado de propuestas y pre-selecciones (pendiente)
 
 **Entregable:** Comprador navega: Home → Listado → Evaluación con datos realistas.
 
@@ -306,27 +306,27 @@ src/
 ### Sprint 4: Flujo Comprador — Alta de SKU (2-3 sesiones)
 **Objetivo:** El formulario completo de 8 tabs, pixel-perfect.
 
-- [ ] `PropuestasEnAlta.tsx`:
+- [x] `PropuestasEnAlta.tsx`:
   - Tabs de categoría (Juguetes, Bebés, Consolas)
   - Botón "Nuevo producto +"
   - Tabla: Imagen, Artículo, Marca, Modelo, Proveedor, Estatus, Clase
   - Click en fila → abre formulario
-- [ ] `AsignarProveedor.tsx` (Modal):
+- [x] `AsignarProveedor.tsx` (Modal integrado en PropuestasEnAlta):
   - Dropdown proveedor + Dropdown categoría
   - Link "Ir al alta del proveedor"
   - Botones Regresar/Continuar
-- [ ] `AltaSkuLayout.tsx`:
+- [x] `AltaSkuLayout.tsx`:
   - ProductHeader (imagen carousel, clasificación, ID Propuesta, botones Cancelar/Dar de alta)
   - Tab navigation con indicadores de progreso
-- [ ] `Tab1InfoGeneral.tsx` — Datos del producto, modelo, origen, SAT, tiempo armado, medidas, artículos incluidos
-- [ ] `Tab2EstrategiaComercial.tsx` — Condiciones compra, preventa, garantías, liquidación con tabla de 12 meses
-- [ ] `Tab3Color.tsx` — Datos por color (acordeones), GTIN, pronóstico venta, imágenes por color
-- [ ] `Tab4Atributos.tsx` — Tabla 2 columnas (proveedor vs comprador), descripción de etiqueta con drag&drop
-- [ ] `Tab5DatosLogisticos.tsx` — Config logística, tabla CEDIS, medidas empaque, empaques, pallet, acomodo
-- [ ] `Tab6CostosPrecios.tsx` — Costos, impuestos, factor utilidad, precio venta, sobreprecio, comisiones, gastos
-- [ ] `Tab7AdminStock.tsx` — Tabla stock por tamaño tienda (Coppel, Canadá, etc.), porcentajes distribución por bodega
-- [ ] `Tab8Configuracion.tsx` — Pronósticos, modelo-color, entrega y etiquetado
-- [ ] `useSkuFormStore.ts` — Persiste datos entre tabs, marca tabs como completados
+- [x] `Tab1InfoGeneral.tsx` — Datos del producto, modelo, origen, SAT, tiempo armado, medidas, artículos incluidos
+- [x] `Tab2EstrategiaComercial.tsx` — Condiciones compra, preventa, garantías, liquidación con tabla de 12 meses
+- [x] `Tab3Color.tsx` — Datos por color (acordeones), GTIN, pronóstico venta, imágenes por color
+- [x] `Tab4Atributos.tsx` — Tabla 2 columnas (proveedor vs comprador), descripción de etiqueta con drag&drop
+- [x] `Tab5DatosLogisticos.tsx` — Config logística, tabla CEDIS, medidas empaque, empaques, pallet, acomodo
+- [x] `Tab6CostosPrecios.tsx` — Costos, impuestos, factor utilidad, precio venta, sobreprecio, comisiones, gastos
+- [x] `Tab7AdminStock.tsx` — Tabla stock por tamaño tienda (Coppel, Canadá, etc.), porcentajes distribución por bodega
+- [x] `Tab8Configuracion.tsx` — Pronósticos, modelo-color, entrega y etiquetado
+- [x] `useSkuFormStore.ts` — Persiste datos entre tabs, marca tabs como completados
 
 **Entregable:** Formulario completo navegable, datos persisten entre tabs, botón "Dar de alta" se habilita al completar todo.
 
