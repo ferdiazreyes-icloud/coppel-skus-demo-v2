@@ -3,29 +3,42 @@ interface RadioOption {
   label: string
 }
 
-interface RadioGroupProps {
-  name: string
+export interface RadioGroupProps {
+  name?: string
+  label?: string
   options: RadioOption[]
   value?: string
   onChange?: (value: string) => void
   disabled?: boolean
+  required?: boolean
   direction?: 'row' | 'column'
   className?: string
 }
 
 export default function RadioGroup({
   name,
+  label,
   options,
   value,
   onChange,
   disabled = false,
+  required,
   direction = 'row',
   className = '',
 }: RadioGroupProps) {
+  const groupName = name || label?.toLowerCase().replace(/\s+/g, '-') || 'radio-group'
+
   return (
-    <div
-      className={`flex gap-4 ${direction === 'column' ? 'flex-col' : 'flex-row flex-wrap'} ${className}`}
-    >
+    <div className={`flex flex-col gap-1 ${className}`}>
+      {label && (
+        <span className="text-sm font-medium text-text-primary">
+          {label}
+          {required && <span className="text-error ml-0.5">*</span>}
+        </span>
+      )}
+      <div
+        className={`flex gap-4 ${direction === 'column' ? 'flex-col' : 'flex-row flex-wrap'}`}
+      >
       {options.map((opt) => (
         <label
           key={opt.value}
@@ -48,7 +61,7 @@ export default function RadioGroup({
           <span className="text-sm text-text-primary">{opt.label}</span>
           <input
             type="radio"
-            name={name}
+            name={groupName}
             value={opt.value}
             checked={value === opt.value}
             onChange={() => onChange?.(opt.value)}
@@ -57,6 +70,7 @@ export default function RadioGroup({
           />
         </label>
       ))}
+      </div>
     </div>
   )
 }

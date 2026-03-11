@@ -4,6 +4,8 @@ import RoleSelector from './pages/RoleSelector'
 import HomeComprador from './pages/comprador/HomeComprador'
 import ListadoPropuestas from './pages/comprador/ListadoPropuestas'
 import EvaluacionPropuesta from './pages/comprador/EvaluacionPropuesta'
+import PropuestasEnAlta from './pages/comprador/PropuestasEnAlta'
+import AltaSkuLayout from './pages/comprador/AltaSkuLayout'
 import HomeProveedor from './pages/proveedor/HomeProveedor'
 
 export default function App() {
@@ -18,9 +20,8 @@ export default function App() {
           <Route path="/comprador" element={<HomeComprador />} />
           <Route path="/comprador/propuestas/:proveedorId" element={<ListadoPropuestas />} />
           <Route path="/comprador/propuestas/:proveedorId/:productoId/evaluar" element={<EvaluacionPropuesta />} />
-          {/* Sprint 4 */}
-          {/* <Route path="/comprador/alta-skus" element={<PropuestasEnAlta />} /> */}
-          {/* <Route path="/comprador/alta-skus/:productoId/:tab" element={<AltaSkuLayout />} /> */}
+          <Route path="/comprador/alta-skus" element={<PropuestasEnAlta />} />
+          <Route path="/comprador/alta-skus/:productoId/:tab" element={<AltaSkuLayout />} />
         </Route>
 
         {/* Proveedor Routes */}

@@ -9,7 +9,7 @@ const bannerImages = [
 
 const quickActions = [
   { icon: Lock, label: 'Propuestas de\nSKU\'s', to: '/comprador/propuestas/sup-001' },
-  { icon: Truck, label: 'Alta de\nproveedores', to: '/comprador/alta-proveedores' },
+  { icon: Truck, label: 'Alta de\nproveedores', to: '/comprador/alta-skus' },
 ]
 
 const featureCards = [
