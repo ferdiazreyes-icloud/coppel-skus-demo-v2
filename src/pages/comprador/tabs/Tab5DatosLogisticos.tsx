@@ -4,15 +4,7 @@ import Input from '../../../components/ui/Input'
 import Select from '../../../components/ui/Select'
 import RadioGroup from '../../../components/ui/RadioGroup'
 import NumberInput from '../../../components/ui/NumberInput'
-import Checkbox from '../../../components/ui/Checkbox'
 import { useSkuFormStore } from '../../../stores/useSkuFormStore'
-
-const CEDIS_DATA = [
-  { id: 'mtr', name: 'CEDIS Coppel Monterrey (MTR)', cedis: 'xxxxxxx', freq: 'xxxxxxxx', lead: 'xxxxxxxx', destino: 'MTY, CULC, HILLO/TGRD/OPC', selected: true },
-  { id: 'clcn', name: 'CEDIS Coppel Culiacán (CLCN)', cedis: 'xxxxxxx', freq: 'xxxxxxxx', lead: 'xxxxxxxx', destino: 'CULC, MZTL, LPZ', selected: true },
-  { id: 'gdl', name: 'CEDIS Coppel Guadalajara (GDL)', cedis: 'xxxxxxx', freq: 'xxxxxxxx', lead: 'xxxxxxxx', destino: 'GDL, AGS, ZAC', selected: true },
-  { id: 'cdmx', name: 'CEDIS Coppel CDMX (CDMX)', cedis: 'xxxxxxx', freq: 'xxxxxxxx', lead: 'xxxxxxxx', destino: 'CDMX, PUE, QRO', selected: false },
-]
 
 const WEIGHT_UNITS = [
   { value: 'kg', label: 'Kilogramos kg' },
@@ -68,54 +60,6 @@ export default function Tab5DatosLogisticos() {
           <NumberInput label="Piezas por contenedor" value={pcsContainer} onChange={setPcsContainer} min={1} required />
           <NumberInput label="MOQ (mínimo de orden)" value={moq} onChange={setMoq} min={1} required />
         </div>
-      </FormSection>
-
-      {/* Datos logísticos */}
-      <FormSection title="Datos logísticos" onSave={handleSave}>
-        <p className="text-sm text-text-secondary mb-4">
-          Consulta la configuración y los centros logísticos asociados a este producto.
-        </p>
-
-        {/* Configuración logística */}
-        <h4 className="font-sans text-sm font-semibold text-text-primary mb-3">Configuración logística</h4>
-        <Select
-          label="Tipo de excepción de distribución"
-          options={[{ value: 'logistica', label: 'Logística_códigos excepción' }]}
-        />
-
-        {/* CEDIS table */}
-        <div className="mt-5 overflow-x-auto">
-          <table className="w-full text-sm">
-            <thead>
-              <tr className="bg-coppel-navy text-white">
-                <th className="w-10 px-3 py-2" />
-                <th className="px-4 py-2 text-left font-semibold">Receptor</th>
-                <th className="px-4 py-2 text-left font-semibold">CEDIS</th>
-                <th className="px-4 py-2 text-left font-semibold">Frecuencia</th>
-                <th className="px-4 py-2 text-left font-semibold">Lead time</th>
-                <th className="px-4 py-2 text-left font-semibold">CEDIS destino</th>
-              </tr>
-            </thead>
-            <tbody>
-              {CEDIS_DATA.map((row, i) => (
-                <tr key={row.id} className={`border-b border-border ${i % 2 === 0 ? 'bg-bg-card' : 'bg-bg-light'}`}>
-                  <td className="px-3 py-2">
-                    <Checkbox checked={row.selected} onChange={() => {}} />
-                  </td>
-                  <td className="px-4 py-2 text-text-primary font-medium">{row.name}</td>
-                  <td className="px-4 py-2 text-text-secondary">{row.cedis}</td>
-                  <td className="px-4 py-2 text-text-secondary">{row.freq}</td>
-                  <td className="px-4 py-2 text-text-secondary">{row.lead}</td>
-                  <td className="px-4 py-2 text-text-secondary">{row.destino}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-
-        <a href="#" className="text-sm text-coppel-blue font-medium hover:underline mt-3 inline-block">
-          Ir a la configuración logística
-        </a>
       </FormSection>
 
       {/* Medidas con empaque individual */}
