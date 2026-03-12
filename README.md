@@ -79,6 +79,20 @@
 - [x] Coppel logo corrected (circles large→medium→small left to right)
 - [x] Deployed to Railway
 
+### Sprint 8: Interactive Guided Tours
+- [x] **TourSlideshow** — Modal walkthrough with icons, progress bar, tips, navigation
+- [x] **TourLauncher** — Floating "?" button with tour menu (shows "Visto" badge)
+- [x] **TourAutoStart** — Auto-launches role tour on first visit (localStorage)
+- [x] 3 tours: Comprador (8 steps), Proveedor (6 steps), Cross-role flow (5 steps)
+- [x] "Ver demo guiada" button on RoleSelector for cross-role tour
+
+### Sprint 9: Real Images
+- [x] 10 real product photos from Mattel/Prinsel CDN
+- [x] Banner images with gradient overlay and text
+- [x] Home cards with real warehouse, inventory, office photos
+- [x] Profile photos for Juanita Solis and Felipe López
+- [x] Zero placeholder images remaining
+
 ### Known Limitations
 - Sidebar filters in ListadoPropuestas are visual only (no actual filtering)
 - Form data in SKU tabs is not persisted to mock backend

@@ -1,10 +1,14 @@
 import { useNavigate } from 'react-router-dom'
+import { PlayCircle } from 'lucide-react'
 import { useAuthStore } from '../stores/useAuthStore'
+import { useTourStore } from '../stores/useTourStore'
 import CoppelLogo from '../components/ui/CoppelLogo'
+import TourSlideshow from '../components/tour/TourSlideshow'
 
 export default function RoleSelector() {
   const navigate = useNavigate()
   const setRole = useAuthStore((s) => s.setRole)
+  const startTour = useTourStore((s) => s.startTour)
 
   const handleSelect = (role: 'comprador' | 'proveedor') => {
     setRole(role)
@@ -25,6 +29,17 @@ export default function RoleSelector() {
         <p className="text-text-muted text-center mb-10">
           Selecciona tu rol para acceder al portal
         </p>
+
+        {/* Demo tour button */}
+        <div className="flex justify-center mb-8">
+          <button
+            onClick={() => startTour('crossRole')}
+            className="flex items-center gap-2 px-5 py-2.5 rounded-pill bg-coppel-navy text-white text-sm font-semibold hover:bg-coppel-blue transition-colors"
+          >
+            <PlayCircle className="w-5 h-5" />
+            Ver demo guiada del flujo completo
+          </button>
+        </div>
 
         {/* Role Cards */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -79,6 +94,8 @@ export default function RoleSelector() {
           </button>
         </div>
       </div>
+
+      <TourSlideshow />
     </div>
   )
 }

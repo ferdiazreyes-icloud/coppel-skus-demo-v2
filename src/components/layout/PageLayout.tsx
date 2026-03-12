@@ -1,6 +1,9 @@
 import { Outlet } from 'react-router-dom'
 import Navbar from './Navbar'
 import Footer from './Footer'
+import TourSlideshow from '../tour/TourSlideshow'
+import TourLauncher from '../tour/TourLauncher'
+import TourAutoStart from '../tour/TourAutoStart'
 
 export default function PageLayout() {
   return (
@@ -10,6 +13,9 @@ export default function PageLayout() {
         <Outlet />
       </main>
       <Footer />
+      <TourAutoStart />
+      <TourSlideshow />
+      <TourLauncher />
     </div>
   )
 }

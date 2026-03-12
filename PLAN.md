@@ -424,3 +424,35 @@ Sprint 0 → Sprint 1 → Sprint 2 → Sprint 3 → Sprint 4 → Sprint 5 → Sp
 ```
 
 Cada sprint es independiente y demostrable. Después de Sprint 2 ya tienes un demo navegable. Después de Sprint 4 ya tienes el flujo más importante (alta SKU). Sprint 6 es lo que conecta todo.
+
+---
+
+### Sprint 8: Tutoriales Interactivos Guiados (1 sesión)
+**Objetivo:** Onboarding interactivo para que cualquier persona entienda el demo.
+
+- [x] `useTourStore.ts` — Zustand store con localStorage para tours completados
+- [x] `tourSteps.ts` — Definición de 3 tours: Comprador (8 pasos), Proveedor (6 pasos), Flujo Cruzado (5 pasos)
+- [x] `TourSlideshow.tsx` — Modal slideshow con iconos, barra de progreso, tips, navegación
+- [x] `TourLauncher.tsx` — Botón flotante "?" con menú de tours disponibles y badge "Visto"
+- [x] `TourAutoStart.tsx` — Auto-lanza el tour del rol al entrar por primera vez
+- [x] Botón "Ver demo guiada" en RoleSelector para tour del flujo cruzado
+- [x] Integración en PageLayout (slideshow + launcher + autostart)
+
+**Entregable:** Tutoriales interactivos accesibles en todo momento desde el botón "?".
+
+---
+
+### Sprint 9: Imágenes Reales (1 sesión)
+**Objetivo:** Reemplazar todos los placeholders con imágenes reales.
+
+- [x] 10 productos con fotos reales de Mattel CDN y Prinsel CDN
+- [x] Banners con fotos de logística/reparto + overlay con gradiente y texto
+- [x] Cards de Home Comprador: bodega, inventario, oficina (Pexels)
+- [x] Cards de Home Proveedor: cajas, equipo de trabajo (Pexels)
+- [x] Fotos de perfil: Juanita Solis y Felipe López con avatares reales
+- [x] Navbar muestra foto de perfil en lugar de iniciales
+- [x] RoleSelector con fotos de perfil por rol
+- [x] Imágenes de referencia en SolicitudDetalle con productos reales
+- [x] Cero placehold.co URLs en todo el proyecto
+
+**Entregable:** Demo visualmente creíble con imágenes reales.
