@@ -92,7 +92,7 @@ export default function PropuestasEnAlta() {
 
       <div className="px-6 pb-10">
         {/* Header */}
-        <div className="flex items-center justify-between mb-6">
+        <div data-tour="alta-header" className="flex items-center justify-between mb-6">
           <h1 className="font-sans text-xl font-bold text-text-primary">
             Propuestas en proceso de alta
           </h1>

@@ -19,67 +19,75 @@ export const CROSS_ROLE_STEPS: CrossRoleStep[] = [
     position: 'bottom',
   },
   {
-    route: '/comprador/propuestas/sup-001',
-    target: 'filter-sidebar',
-    title: '2. Catálogo de propuestas',
+    route: '/comprador',
+    target: 'notifications',
+    title: '2. Notificaciones del comprador',
     description:
-      'El catálogo muestra todas las propuestas del proveedor. En el sidebar izquierdo puede filtrar por categoría, precio, margen y marca.',
-    position: 'right',
+      'La campana muestra las notificaciones en tiempo real. Cuando un proveedor envía una propuesta o responde a una solicitud, Juanita recibe una alerta aquí.',
+    position: 'bottom',
   },
   {
     route: '/comprador/propuestas/sup-001',
-    target: 'product-list',
-    title: '3. Tarjetas de producto',
+    target: 'listado-header',
+    title: '3. Catálogo de propuestas',
     description:
-      'Cada tarjeta muestra imagen, marca, modelo, precio, costo y margen. Juanita puede seleccionar productos y solicitar muestras.',
-    position: 'top',
+      'Juanita entra al catálogo de propuestas del proveedor Mattel. Aquí puede filtrar por categoría, precio, margen y marca en el sidebar izquierdo.',
+    position: 'bottom',
+  },
+  {
+    route: '/comprador/propuestas/sup-001',
+    target: 'first-product',
+    title: '4. Tarjetas de producto',
+    description:
+      'Cada tarjeta muestra la imagen, marca, modelo, precio, costo y margen del producto. Juanita puede seleccionar productos y hacer clic en "Ficha técnica" para solicitar muestras.',
+    position: 'bottom',
   },
   {
     route: '/comprador/propuestas/sup-001/prod-001/evaluar',
     target: 'product-summary',
-    title: '4. Evaluación de propuesta',
+    title: '5. Evaluación de propuesta',
     description:
-      'Al hacer clic en "Solicitar muestra", Juanita ve el detalle del producto: datos, cantidad, especificaciones, dirección y fechas de entrega.',
+      'Al hacer clic en "Solicitar muestra", Juanita ve el detalle del producto con datos, cantidad, especificaciones, dirección y fechas de entrega.',
     position: 'bottom',
   },
   {
     route: '/comprador/propuestas/sup-001/prod-001/evaluar',
     target: 'sample-request-btn',
-    title: '5. Solicitar muestra',
+    title: '6. Solicitar muestra',
     description:
-      'Al dar clic en "Continuar", se envía la solicitud al proveedor Felipe López. Él recibirá una notificación automática.',
+      'Al dar clic en "Continuar", se envía la solicitud al proveedor Felipe López. Él recibirá una notificación automática en su panel.',
     position: 'top',
   },
   {
     route: '/comprador/alta-skus',
-    target: 'category-tabs',
-    title: '6. Propuestas en alta',
+    target: 'alta-header',
+    title: '7. Propuestas en alta',
     description:
-      'Aquí Juanita ve los SKU\'s en proceso de alta, organizados por categoría: Juguetes, Bebés, Consolas. Puede agregar nuevos productos.',
+      'En esta sección Juanita ve los SKU\'s en proceso de alta. Puede filtrar por categoría (Juguetes, Bebés, Consolas) y agregar nuevos productos con "+ Nuevo producto".',
     position: 'bottom',
   },
   {
     route: '/comprador/alta-skus',
-    target: 'products-table',
-    title: '7. Tabla de SKU\'s',
+    target: 'category-tabs',
+    title: '8. Categorías y tabla',
     description:
-      'La tabla muestra imagen, artículo, marca, modelo, proveedor, estatus y clase. Al hacer clic en una fila se abre el formulario de alta.',
-    position: 'top',
+      'Las pestañas organizan los productos. La tabla muestra imagen, artículo, marca, modelo, proveedor, estatus y clase. Al hacer clic en una fila se abre el formulario de alta.',
+    position: 'bottom',
   },
   {
     route: '/comprador/alta-skus/prod-001/informacion-general',
     target: 'product-header',
-    title: '8. Formulario de alta SKU',
+    title: '9. Formulario de alta SKU',
     description:
-      'El encabezado muestra los datos del producto, clasificación y los botones de "Cancelar" y "Dar de alta". Aquí se completa toda la información del SKU.',
+      'El encabezado muestra los datos del producto y los botones "Cancelar" y "Dar de alta". Aquí Juanita completa toda la información del SKU.',
     position: 'bottom',
   },
   {
     route: '/comprador/alta-skus/prod-001/informacion-general',
     target: 'sku-tabs',
-    title: '9. Las 8 pestañas del SKU',
+    title: '10. Las 8 pestañas del SKU',
     description:
-      'El formulario tiene 8 tabs: Info General, Estrategia Comercial, Color, Atributos, Datos Logísticos, Costos, Stock y Configuración. Cada indicador muestra el progreso.',
+      'El formulario tiene 8 tabs: Info General, Estrategia Comercial, Color, Atributos, Datos Logísticos, Costos, Stock y Configuración. Los indicadores muestran el progreso.',
     position: 'bottom',
   },
 
@@ -88,39 +96,47 @@ export const CROSS_ROLE_STEPS: CrossRoleStep[] = [
     route: '/proveedor',
     role: 'proveedor',
     target: 'quick-actions',
-    title: '10. Ahora vemos el lado del proveedor',
+    title: '11. Ahora el lado del proveedor',
     description:
       'Felipe López es el proveedor (Mattel). Desde su panel accede a solicitudes, catálogos, productos y documentos.',
     position: 'bottom',
   },
   {
+    route: '/proveedor',
+    target: 'notifications',
+    title: '12. Notificaciones del proveedor',
+    description:
+      'Felipe recibe aquí las notificaciones de Juanita: solicitudes de muestra, requerimientos de información y confirmaciones de alta de SKU.',
+    position: 'bottom',
+  },
+  {
     route: '/proveedor/solicitudes',
     target: 'solicitudes-list',
-    title: '11. Historial de solicitudes',
+    title: '13. Historial de solicitudes',
     description:
-      'Aquí Felipe ve todas las solicitudes que Juanita le ha enviado. Cada card muestra el código, comprador, fecha, cantidad de productos y estatus.',
+      'Aquí Felipe ve todas las solicitudes que Juanita le ha enviado. Cada card muestra el código, comprador, fecha, productos y estatus.',
     position: 'bottom',
   },
   {
     route: '/proveedor/solicitudes/sol-001',
     target: 'buyer-specs',
-    title: '12. Detalle de la solicitud',
+    title: '14. Detalle de la solicitud',
     description:
-      'Felipe puede ver las especificaciones que Juanita escribió: tipo de productos, cantidades, tiempos de entrega y cualquier requisito especial.',
+      'Felipe puede ver las especificaciones que Juanita escribió: tipo de productos, cantidades, tiempos de entrega y requisitos especiales.',
     position: 'bottom',
   },
   {
     route: '/proveedor/solicitudes/sol-001',
     target: 'carga-buttons',
-    title: '13. Opciones de carga',
+    title: '15. Opciones de carga',
     description:
-      'Felipe elige cómo enviar sus propuestas: "Carga individual" para un producto a la vez, o "Carga masiva" para subir varios por Excel.',
+      'Felipe elige cómo enviar sus propuestas: "Carga individual" para un producto a la vez, o "Carga masiva" para subir varios con una plantilla Excel.',
     position: 'top',
   },
   {
     route: '/proveedor/solicitudes/sol-001/carga-individual',
     target: 'product-type',
-    title: '14. Carga individual',
+    title: '16. Carga individual',
     description:
       'Felipe selecciona el tipo de producto (muñeca, montable, juego). Los campos del formulario cambian dinámicamente según el tipo seleccionado.',
     position: 'bottom',
@@ -128,17 +144,17 @@ export const CROSS_ROLE_STEPS: CrossRoleStep[] = [
   {
     route: '/proveedor/solicitudes/sol-001/carga-individual',
     target: 'save-buttons',
-    title: '15. Guardar propuesta',
+    title: '17. Guardar propuesta',
     description:
-      'Al guardar, la propuesta se envía a Juanita automáticamente. Ella recibirá una notificación para revisar la propuesta del proveedor.',
+      'Al guardar, la propuesta se envía a Juanita automáticamente. Ella recibirá una notificación para revisarla.',
     position: 'top',
   },
   {
     route: '/proveedor/propuestas/prod-001',
     target: 'ficha-header',
-    title: '16. Ficha técnica',
+    title: '18. Ficha técnica',
     description:
-      'Felipe puede revisar sus propuestas enviadas en la ficha técnica. Desde aquí puede editar la información o enviarla formalmente a revisión del comprador.',
+      'Felipe puede revisar sus propuestas en la ficha técnica. Desde aquí puede editar la información o enviarla formalmente a revisión del comprador.',
     position: 'bottom',
   },
   {
@@ -146,7 +162,7 @@ export const CROSS_ROLE_STEPS: CrossRoleStep[] = [
     target: 'greeting',
     title: '¡Tour completado!',
     description:
-      'Así funciona el flujo completo: el comprador solicita → el proveedor responde → el comprador evalúa y da de alta el SKU. Las notificaciones conectan ambos roles en tiempo real.',
+      'Así funciona el flujo: el comprador solicita → el proveedor responde → el comprador evalúa y da de alta el SKU. Las notificaciones conectan ambos roles en tiempo real.',
     position: 'bottom',
   },
 ]

@@ -54,7 +54,7 @@ export default function ListadoPropuestas() {
 
       <div className="px-6 pb-10">
         {/* Page header */}
-        <div className="mb-6">
+        <div data-tour="listado-header" className="mb-6">
           <h1 className="font-sans text-xl font-bold text-text-primary">{supplierName}</h1>
           <p className="font-sans text-lg text-text-secondary">Solicitud {solicitudCode}</p>
         </div>
@@ -209,15 +209,16 @@ export default function ListadoPropuestas() {
 
             {/* Product list */}
             <div data-tour="product-list" className="space-y-4">
-              {products.map((product) => (
-                <ProductCard
-                  key={product.id}
-                  product={product}
-                  selected={selectedProducts.has(product.id)}
-                  onSelect={(sel) => toggleProduct(product.id, sel)}
-                  onViewFicha={() => navigate(`/comprador/propuestas/${proveedorId}/${product.id}/evaluar`)}
-                  onCompare={() => {}}
-                />
+              {products.map((product, idx) => (
+                <div key={product.id} {...(idx === 0 ? { 'data-tour': 'first-product' } : {})}>
+                  <ProductCard
+                    product={product}
+                    selected={selectedProducts.has(product.id)}
+                    onSelect={(sel) => toggleProduct(product.id, sel)}
+                    onViewFicha={() => navigate(`/comprador/propuestas/${proveedorId}/${product.id}/evaluar`)}
+                    onCompare={() => {}}
+                  />
+                </div>
               ))}
             </div>
 
