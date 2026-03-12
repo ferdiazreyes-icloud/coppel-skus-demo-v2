@@ -418,9 +418,9 @@ Para cada pantalla, verificar contra el Figma:
 ## Orden de Implementación Recomendado
 
 ```
-Sprint 0 → Sprint 1 → Sprint 2 → Sprint 3 → Sprint 4 → Sprint 5 → Sprint 6 → Sprint 7 → Sprint 8 → Sprint 9
-  Setup     Layout     Homes     Listado    Alta SKU   Proveedor   Flujo      Polish     Tours      Imágenes
-  (base)    (pixel)    (entry)   (eval)     (forms)    (carga)     (connect)  (deploy)   (spotlight) (reales)
+Sprint 0 → Sprint 1 → Sprint 2 → Sprint 3 → Sprint 4 → Sprint 5 → Sprint 6 → Sprint 7 → Sprint 8 → Sprint 9 → Sprint 10
+  Setup     Layout     Homes     Listado    Alta SKU   Proveedor   Flujo      Polish     Tours      Imágenes   Cross-Role
+  (base)    (pixel)    (entry)   (eval)     (forms)    (carga)     (connect)  (deploy)   (spotlight) (reales)   (multi-page)
 ```
 
 Cada sprint es independiente y demostrable. Después de Sprint 2 ya tienes un demo navegable. Después de Sprint 4 ya tienes el flujo más importante (alta SKU). Sprint 6 es lo que conecta todo.
@@ -435,7 +435,6 @@ Cada sprint es independiente y demostrable. Después de Sprint 2 ya tienes un de
 - [x] `spotlightSteps.ts` — Spotlight steps por rol: Comprador (6 pasos), Proveedor (6 pasos)
 - [x] `SpotlightTour.tsx` — Overlay SVG con recorte spotlight, borde amarillo pulsante, tooltip posicionado junto al elemento real, barra de progreso, navegación
 - [x] `WelcomeModal.tsx` — Modal de bienvenida "Iniciar tour" / "No, ya conozco el portal"
-- [x] `TourSlideshow.tsx` — Modal slideshow para tour cross-role (iconos, tips, navegación)
 - [x] `TourLauncher.tsx` — Botón flotante "?" con menú de tours y badge "Visto"
 - [x] `TourAutoStart.tsx` — Muestra Welcome modal al entrar por primera vez, luego lanza spotlight
 - [x] `data-tour` attributes en: greeting, banner, quick-actions, feature-cards, notifications, user-avatar, solicitudes, mi-cuenta
@@ -460,3 +459,30 @@ Cada sprint es independiente y demostrable. Después de Sprint 2 ya tienes un de
 - [x] Cero placehold.co URLs en todo el proyecto
 
 **Entregable:** Demo visualmente creíble con imágenes reales.
+
+---
+
+### Sprint 10: Tour Cross-Role Multi-Página (1 sesión)
+**Objetivo:** Tour guiado spotlight que navega entre pantallas reales y cambia de rol, mostrando el flujo completo Comprador ↔ Proveedor.
+
+- [x] `crossRoleSteps.ts` — 19 pasos con ruta, target `data-tour`, rol y posición del tooltip
+- [x] `CrossRoleTour.tsx` — Componente con máquina de estados (transition → measuring → ready)
+- [x] Transiciones animadas entre páginas: spinner + label descriptivo ("Navegando a: ...", "Cambiando a Proveedor...")
+- [x] Cambio automático de rol via `useAuthStore.setRole()` cuando el flujo pasa de Comprador a Proveedor
+- [x] Spotlight con altura máxima de 500px, auto-fallback del tooltip a `top` cuando no hay espacio abajo
+- [x] `data-tour` attributes agregados a todas las sub-páginas:
+  - `ListadoPropuestas`: listado-header, filter-sidebar, product-list, first-product
+  - `EvaluacionPropuesta`: product-summary, sample-request-btn
+  - `PropuestasEnAlta`: alta-header, category-tabs, products-table
+  - `AltaSkuLayout`: product-header, sku-tabs
+  - `HistorialSolicitudes`: solicitudes-list
+  - `SolicitudDetalle`: buyer-specs, carga-buttons
+  - `CargaIndividual`: product-type, save-buttons
+  - `FichaTecnica`: ficha-header
+- [x] Pasos de notificaciones para ambos roles (campana en navbar)
+- [x] Botón "Ver demo guiada del flujo completo" en RoleSelector navega a `/comprador` e inicia el tour
+- [x] Al cerrar el tour se regresa al RoleSelector
+- [x] Barra de progreso bicolor: azul para pasos comprador, naranja para pasos proveedor
+- [x] Badge de rol actual (👩 Comprador / 👨 Proveedor) en el header del tooltip
+
+**Entregable:** Tour guiado de 19 pasos que navega por todas las pantallas del portal, cambiando de rol automáticamente, con transiciones animadas entre páginas.

@@ -2,7 +2,7 @@
 
 > Demo funcional del portal SGC (Sistema de Gestión Comercial) de Coppel para gestionar propuestas y alta de SKU's entre compradores internos y proveedores externos.
 
-**Version:** 1.2.0 (Sprints 0–9 complete)
+**Version:** 1.3.0 (Sprints 0–10 complete)
 **Live demo:** [coppel-skus-demo-v2-production.up.railway.app](https://coppel-skus-demo-v2-production.up.railway.app)
 **Figma reference:** [SKU's_SGC](https://www.figma.com/design/gYTM6PwHzQPGycic3kdIE6/SKU-s_SGC)
 
@@ -80,15 +80,34 @@
 - [x] Coppel logo corrected (circles large→medium→small left to right)
 - [x] Deployed to Railway
 
-### Sprint 8: Interactive Guided Tours (Spotlight + Slideshow)
+### Sprint 8: Interactive Guided Tours (Spotlight)
 - [x] **SpotlightTour** — SVG overlay with cutout highlighting real page elements, yellow pulsing border, tooltip with progress bar
 - [x] **WelcomeModal** — "Iniciar tour" / "No, ya conozco el portal" on first visit per role
-- [x] **TourSlideshow** — Modal walkthrough for cross-role flow (icons, tips, navigation)
 - [x] **TourLauncher** — Floating "?" FAB button with tour menu and "Visto" badges
 - [x] **TourAutoStart** — Auto-shows Welcome + Spotlight on first visit (persisted in localStorage)
-- [x] 3 tours: Comprador spotlight (6 steps), Proveedor spotlight (6 steps), Cross-role slideshow (5 steps)
-- [x] "Ver demo guiada" button on RoleSelector for cross-role tour
-- [x] `data-tour` attributes on key elements: greeting, banner, quick-actions, feature-cards, notifications, user-avatar, solicitudes, mi-cuenta
+- [x] 2 role-specific spotlight tours: Comprador (6 steps), Proveedor (6 steps)
+- [x] `data-tour` attributes on home page elements: greeting, banner, quick-actions, feature-cards, notifications, user-avatar, solicitudes, mi-cuenta
+
+### Sprint 10: Cross-Role Spotlight Tour (Multi-page Navigation)
+- [x] **CrossRoleTour** — Full spotlight tour that navigates between real pages, switches roles, and highlights DOM elements on each screen
+- [x] **Phase state machine** — transition → measuring → ready, with animated transition screens between pages
+- [x] **Page transitions** — Spinner overlay with label ("Navegando a: ..." / "Cambiando a Proveedor...") between route changes
+- [x] **19 steps** covering the complete Comprador → Proveedor flow:
+  - Steps 1–2: Home Comprador (quick actions + notifications)
+  - Steps 3–4: Catálogo de propuestas (header + first product card)
+  - Steps 5–6: Evaluación de propuesta (product summary + sample request)
+  - Steps 7–8: Propuestas en alta (header + category tabs)
+  - Steps 9–10: Formulario Alta SKU (product header + 8 tabs)
+  - Steps 11–12: Home Proveedor (quick actions + notifications)
+  - Steps 13: Historial de solicitudes
+  - Steps 14–15: Detalle solicitud (specs + carga buttons)
+  - Steps 16–17: Carga individual (product type + save)
+  - Step 18: Ficha técnica
+  - Step 19: Tour completed
+- [x] `data-tour` attributes added to all sub-pages: listado-header, first-product, filter-sidebar, product-list, product-summary, sample-request-btn, alta-header, category-tabs, products-table, product-header, sku-tabs, solicitudes-list, buyer-specs, carga-buttons, product-type, save-buttons, ficha-header
+- [x] "Ver demo guiada del flujo completo" button on RoleSelector launches the tour
+- [x] Spotlight height capped at 500px for tall elements, auto-fallback tooltip to top when no space below
+- [x] Tour returns to RoleSelector on close
 
 ### Sprint 9: Real Images
 - [x] 10 real product photos from Mattel/Prinsel CDN (Wicked, Frozen, Moana, Barbie, Monster High, Prinsel Push Car)
@@ -153,9 +172,9 @@ src/
 ├── components/
 │   ├── layout/          # Navbar, Footer, Breadcrumb, PageLayout
 │   ├── shared/          # FormSection, ProductHeader, FilterSidebar
-│   ├── tour/            # SpotlightTour, TourSlideshow, WelcomeModal, TourLauncher, TourAutoStart
+│   ├── tour/            # SpotlightTour, CrossRoleTour, WelcomeModal, TourLauncher, TourAutoStart
 │   └── ui/              # 20+ reusable UI components
-├── data/                # Mock products, catalog, tour step definitions
+├── data/                # Mock products, catalog, tour steps, cross-role steps
 ├── pages/
 │   ├── comprador/       # Comprador pages
 │   │   └── tabs/        # 8 SKU form tabs
