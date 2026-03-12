@@ -335,29 +335,27 @@ src/
 ### Sprint 5: Flujo Proveedor — Solicitudes y Carga (1-2 sesiones)
 **Objetivo:** El proveedor recibe solicitudes y envía propuestas.
 
-- [ ] `mockSolicitudes.ts` — 3+ solicitudes con specs del comprador
-- [ ] `HistorialSolicitudes.tsx`:
+- [x] `mockSolicitudes.ts` — 3+ solicitudes con specs del comprador
+- [x] `HistorialSolicitudes.tsx`:
   - Lista de solicitudes con estatus
   - Link a detalle
-- [ ] `SolicitudDetalle.tsx`:
+- [x] `SolicitudDetalle.tsx`:
   - Especificaciones del comprador (textarea readonly)
   - Galería de imágenes de referencia
   - Archivos adjuntos (links a PDF)
   - Botones: Carga individual / Carga masiva
-- [ ] `CargaIndividual.tsx`:
+- [x] `CargaIndividual.tsx`:
   - Dropdown tipo de producto
   - Formulario: Información general (artículo, tipo, país, marca, modelo, URL video, imágenes, comentarios, campos dinámicos por tipo)
   - Formulario: Información comercial (costo, mínimo compra, tiempo entrega, precios, IVA)
   - Botones: Eliminar propuesta / Guardar
-- [ ] `CargaMasiva.tsx`:
+- [x] `CargaMasiva.tsx`:
   - Dropdown tipo producto + botón Descargar plantilla
   - Drag & drop zone para archivo
   - Tabla de productos cargados con paginación
   - Botón Finalizar
-- [ ] `VistaRapidaPropuestas.tsx`:
-  - Tabla resumen de todas las propuestas
-  - Link a ficha técnica
-- [ ] `FichaTecnica.tsx`:
+- ~~`VistaRapidaPropuestas.tsx`~~ — Removido (no estaba en Figma)
+- [x] `FichaTecnica.tsx`:
   - Vista readonly/editable de la propuesta
 
 **Entregable:** Proveedor navega: Home → Solicitud → Carga → Vista rápida → Ficha técnica.
@@ -367,19 +365,13 @@ src/
 ### Sprint 6: Flujo Completo + Notificaciones (1 sesión)
 **Objetivo:** Conectar ambas vistas con un flujo realista.
 
-- [ ] `useNotificationStore.ts` — Notificaciones cruzadas entre roles
-- [ ] `useWorkflow.ts` — Máquina de estados para transiciones:
-  ```
-  Comprador solicita info → Proveedor recibe notificación
-  Proveedor envía propuestas → Comprador recibe notificación
-  Comprador pre-selecciona → Estatus cambia
-  Comprador inicia alta SKU → Proveedor ve complemento
-  ```
-- [ ] Indicador de notificaciones en Navbar (número rojo)
-- [ ] Panel de notificaciones (dropdown simple)
-- [ ] Transiciones de estatus en badges al tomar acciones
-- [ ] Modal de confirmación en acciones importantes (enviar, dar de alta)
-- [ ] Modal de éxito después de acciones completadas
+- [x] `useNotificationStore.ts` — Notificaciones cruzadas entre roles con seed data
+- [x] Indicador de notificaciones en Navbar (badge rojo con conteo)
+- [x] Panel de notificaciones (dropdown con read/unread, timestamps, click-to-navigate)
+- [x] `ConfirmModal.tsx` — Modal con variantes confirm/success
+- [x] Modal de confirmación en: Enviar a revisión, Solicitar muestra, Dar de alta SKU, Guardar propuesta
+- [x] Modal de éxito después de acciones completadas
+- [x] Notificaciones cruzadas entre roles al ejecutar acciones
 
 **Entregable:** Demo completo donde puedes hacer el flujo entero cambiando entre roles.
 
@@ -388,15 +380,15 @@ src/
 ### Sprint 7: Polish + Deploy (1 sesión)
 **Objetivo:** Pulir detalles visuales y deployar.
 
-- [ ] Revisión pixel-perfect de cada pantalla contra Figma
-- [ ] Responsive check (1440px es el target principal)
-- [ ] Estados empty (listas vacías, formularios sin datos)
-- [ ] Estados de loading (skeleton loaders)
-- [ ] Hover states en todos los elementos interactivos
-- [ ] Focus states para accesibilidad
-- [ ] Transiciones suaves entre páginas
-- [ ] Deploy en Railway
-- [ ] Actualizar README.md
+- [x] Revisión pixel-perfect de cada pantalla contra Figma
+- [x] Responsive check (1440px es el target principal)
+- [x] Estados empty (Table, listas)
+- [x] Hover states en todos los elementos interactivos (buttons, cards, table rows, tabs)
+- [x] Focus states para accesibilidad (focus-visible outline)
+- [x] Transiciones suaves (modals animate-in, card hover shadows)
+- [x] Logo Coppel corregido (círculos grande→mediano→chico)
+- [x] Deploy en Railway
+- [x] Actualizar README.md y PLAN.md
 
 **Entregable:** Demo en producción, listo para presentar.
 

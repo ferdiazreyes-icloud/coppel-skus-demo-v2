@@ -95,3 +95,40 @@ h1, h2, h3, h4, h5, h6 {
 ::-webkit-scrollbar-thumb:hover {
   background: var(--color-text-muted);
 }
+
+/* ─── Animations ─── */
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.2s ease-out;
+}
+
+.animate-scale-in {
+  animation: scaleIn 0.2s ease-out;
+}
+
+.animate-slide-up {
+  animation: slideUp 0.25s ease-out;
+}
+
+/* ─── Focus visible ─── */
+
+:focus-visible {
+  outline: 2px solid var(--color-coppel-blue);
+  outline-offset: 2px;
+  border-radius: 2px;
+}

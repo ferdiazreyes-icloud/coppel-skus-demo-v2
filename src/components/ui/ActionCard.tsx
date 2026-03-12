@@ -20,7 +20,7 @@ export default function ActionCard({
   className = '',
 }: ActionCardProps) {
   return (
-    <div className={`bg-bg-card rounded-md overflow-hidden border border-border flex flex-col ${className}`}>
+    <div className={`bg-bg-card rounded-md overflow-hidden border border-border flex flex-col transition-shadow hover:shadow-md ${className}`}>
       {/* Image */}
       {image && (
         <div className="h-40 overflow-hidden">

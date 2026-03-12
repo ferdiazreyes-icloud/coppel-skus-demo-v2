@@ -30,7 +30,7 @@ export default function Modal({
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
       {/* Overlay */}
       <div
-        className="absolute inset-0 bg-black/40"
+        className="absolute inset-0 bg-black/40 animate-fade-in"
         onClick={onClose}
       />
 
@@ -38,7 +38,7 @@ export default function Modal({
       <div
         className={`
           relative bg-bg-card rounded-md shadow-xl w-full ${sizeClasses[size]}
-          animate-in fade-in zoom-in-95
+          animate-scale-in
         `}
       >
         {/* Header */}

@@ -23,7 +23,7 @@ export default function ProductCard({
   className = '',
 }: ProductCardProps) {
   return (
-    <div className={`bg-bg-card rounded-md border border-border p-5 flex gap-5 relative ${className}`}>
+    <div className={`bg-bg-card rounded-md border border-border p-5 flex gap-5 relative transition-shadow hover:shadow-md ${className}`}>
       {/* Badge */}
       <div className="absolute top-4 right-4">
         <Badge status={product.status} />

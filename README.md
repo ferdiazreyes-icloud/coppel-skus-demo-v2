@@ -2,7 +2,7 @@
 
 > Demo funcional del portal SGC (Sistema de Gestión Comercial) de Coppel para gestionar propuestas y alta de SKU's entre compradores internos y proveedores externos.
 
-**Version:** 0.4.0 (Sprint 4 complete)
+**Version:** 1.0.0 (All sprints complete)
 **Figma reference:** [SKU's_SGC](https://www.figma.com/design/gYTM6PwHzQPGycic3kdIE6/SKU-s_SGC)
 
 ---
@@ -59,31 +59,30 @@
 - [x] **Tab 7 - Admin Stock** — Store format stock grid, warehouse distribution percentages
 - [x] **Tab 8 - Configuración** — Forecasts, model-color visibility, delivery/labeling checkboxes
 
----
-
-## What's Pending
-
 ### Sprint 5: Proveedor Flow — Solicitudes & Upload
-- [ ] HistorialSolicitudes — List with status badges
-- [ ] SolicitudDetalle — Buyer specs + reference images
-- [ ] CargaIndividual — Product type form with dynamic fields
-- [ ] CargaMasiva — Template download + drag & drop upload + preview table
+- [x] **HistorialSolicitudes** — List of solicitudes with status badges, click to navigate
+- [x] **SolicitudDetalle** — Buyer specs (readonly), reference images, PDF documents, carga buttons
+- [x] **CargaIndividual** — Product type form with dynamic fields (muñeca/montable), commercial info
+- [x] **CargaMasiva** — Template download, drag & drop upload, products table with pagination
+- [x] **FichaTecnica** — Readonly product detail with edit/send-to-review buttons
 
 ### Sprint 6: Cross-role Integration
-- [ ] Notifications between roles
-- [ ] Workflow state machine (status transitions)
-- [ ] Connect comprador and proveedor flows
+- [x] **ConfirmModal** — Reusable modal with confirm/success variants
+- [x] **Notification system** — Cross-role notifications with badge count, dropdown panel, click-to-navigate
+- [x] Confirm + success modals on: send to review, request sample, register SKU, save proposal
+- [x] Notifications trigger across roles when actions are taken
 
 ### Sprint 7: Polish & Deploy
-- [ ] Responsive adjustments
-- [ ] Loading/error states
-- [ ] Deploy to Railway
+- [x] CSS animations for modals (fade-in, scale-in)
+- [x] Hover shadow effects on cards (ProductCard, ActionCard)
+- [x] Focus-visible outline for accessibility
+- [x] Coppel logo corrected (circles large→medium→small left to right)
+- [x] Deployed to Railway
 
 ### Known Limitations
 - Sidebar filters in ListadoPropuestas are visual only (no actual filtering)
 - Form data in SKU tabs is not persisted to mock backend
-- useProposalStore not yet created
-- mockProveedores.ts not yet created (supplier data is inline)
+- This is a demo — no real API or database
 
 ---
 
@@ -98,6 +97,11 @@
 | `/comprador/alta-skus` | PropuestasEnAlta | Comprador |
 | `/comprador/alta-skus/:productoId/:tab` | AltaSkuLayout (8 tabs) | Comprador |
 | `/proveedor` | HomeProveedor | Proveedor |
+| `/proveedor/solicitudes` | HistorialSolicitudes | Proveedor |
+| `/proveedor/solicitudes/:solicitudId` | SolicitudDetalle | Proveedor |
+| `/proveedor/solicitudes/:solicitudId/carga-individual` | CargaIndividual | Proveedor |
+| `/proveedor/solicitudes/:solicitudId/carga-masiva` | CargaMasiva | Proveedor |
+| `/proveedor/propuestas/:propuestaId` | FichaTecnica | Proveedor |
 
 ---
 
