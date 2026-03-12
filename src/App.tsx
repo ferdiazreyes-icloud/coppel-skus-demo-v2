@@ -11,7 +11,6 @@ import HistorialSolicitudes from './pages/proveedor/HistorialSolicitudes'
 import SolicitudDetalle from './pages/proveedor/SolicitudDetalle'
 import CargaIndividual from './pages/proveedor/CargaIndividual'
 import CargaMasiva from './pages/proveedor/CargaMasiva'
-import VistaRapidaPropuestas from './pages/proveedor/VistaRapidaPropuestas'
 import FichaTecnica from './pages/proveedor/FichaTecnica'
 
 export default function App() {
@@ -37,7 +36,6 @@ export default function App() {
           <Route path="/proveedor/solicitudes/:solicitudId" element={<SolicitudDetalle />} />
           <Route path="/proveedor/solicitudes/:solicitudId/carga-individual" element={<CargaIndividual />} />
           <Route path="/proveedor/solicitudes/:solicitudId/carga-masiva" element={<CargaMasiva />} />
-          <Route path="/proveedor/propuestas" element={<VistaRapidaPropuestas />} />
           <Route path="/proveedor/propuestas/:propuestaId" element={<FichaTecnica />} />
         </Route>
 
