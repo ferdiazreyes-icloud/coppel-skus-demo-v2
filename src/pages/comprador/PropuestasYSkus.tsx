@@ -17,13 +17,7 @@ const cards = [
     buttonLabel: 'Explorar propuestas',
     to: '/comprador/propuestas/sup-001',
   },
-  {
-    image: 'https://images.pexels.com/photos/7163395/pexels-photo-7163395.jpeg?auto=compress&cs=tinysrgb&w=600',
-    title: 'Seguimiento muestras',
-    description: 'Control de muestras recibidas y pendientes',
-    buttonLabel: 'Ver seguimiento',
-    to: '#',
-  },
+
   {
     image: 'https://images.pexels.com/photos/4483608/pexels-photo-4483608.jpeg?auto=compress&cs=tinysrgb&w=600',
     title: 'Propuestas en proceso de alta',
