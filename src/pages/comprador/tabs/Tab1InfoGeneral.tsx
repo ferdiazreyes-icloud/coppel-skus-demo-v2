@@ -15,8 +15,8 @@ const ORIGINS = [
 ]
 
 const COUNTRIES = [
-  { value: 'mexico', label: 'México' },
   { value: 'china', label: 'China' },
+  { value: 'mexico', label: 'México' },
   { value: 'usa', label: 'Estados Unidos' },
 ]
 
