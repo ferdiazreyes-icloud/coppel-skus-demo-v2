@@ -123,15 +123,6 @@ export default function Tab1InfoGeneral() {
         />
       </FormSection>
 
-      {/* Producto y servicio SAT */}
-      <FormSection title="Producto y servicio SAT" onSave={handleSave}>
-        <Select
-          label="Producto y servicio SAT"
-          options={[{ value: '46181500', label: '46181500 - Juguetes' }]}
-          required
-        />
-      </FormSection>
-
       {/* Tiempo de armado */}
       <FormSection title="Tiempo de armado total" onSave={handleSave}>
         <p className="text-sm text-text-secondary mb-4">
