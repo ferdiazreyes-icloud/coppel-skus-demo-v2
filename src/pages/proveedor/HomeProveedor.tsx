@@ -1,18 +1,17 @@
 import { useNavigate } from 'react-router-dom'
 import {
   User, BookOpen, FileText, FolderOpen,
-  MapPin, Building2, Share2, Package,
-  ChevronRight,
+  MapPin, Building2, Factory,
+  ChevronRight, Globe, Lock,
 } from 'lucide-react'
 import { useAuthStore } from '../../stores/useAuthStore'
 import Breadcrumb from '../../components/layout/Breadcrumb'
 
 const quickActions = [
-  { icon: User, label: 'Mi perfil', to: '#' },
+  { icon: User, label: 'Mi cuenta', to: '#' },
   { icon: BookOpen, label: 'Catálogos', to: '#' },
   { icon: FileText, label: 'Mis solicitudes', to: '/proveedor/solicitudes' },
   { icon: FolderOpen, label: 'Documentos', to: '#' },
-  { icon: Package, label: 'Mis productos', to: '#' },
 ]
 
 const solicitudCards = [
@@ -35,10 +34,10 @@ const solicitudCards = [
 const accountCards = [
   { icon: User, title: 'Mi perfil', buttonLabel: 'Editar perfil', to: '#' },
   { icon: MapPin, title: 'Direcciones', buttonLabel: 'Administrar direcciones', to: '#' },
-  { icon: Building2, title: 'Información de la empresa', buttonLabel: 'Configurar perfil comercial', to: '#' },
-  { icon: Share2, title: 'Redes sociales', buttonLabel: 'Vincular redes', to: '#' },
-  { icon: FolderOpen, title: 'Documentos', buttonLabel: 'Gestionar documentos', to: '#' },
-  { icon: Package, title: 'Productos y catálogos', buttonLabel: 'Ver mis productos', to: '#' },
+  { icon: Factory, title: 'Información de fábrica', buttonLabel: 'Configurar información de fábrica', to: '#' },
+  { icon: Globe, title: 'Redes sociales', buttonLabel: 'Vincular cuentas', to: '#' },
+  { icon: Building2, title: 'Información de la empresa', buttonLabel: 'Administrar perfil de empresa', to: '#' },
+  { icon: Lock, title: 'Propuestas y operaciones', buttonLabel: 'Ver mis propuestas', to: '/proveedor/solicitudes' },
 ]
 
 export default function HomeProveedor() {
