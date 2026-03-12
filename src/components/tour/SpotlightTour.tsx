@@ -36,19 +36,18 @@ export default function SpotlightTour({ steps, open, onClose, tourName }: Spotli
   const isFirst = step === 0
   const isLast = step === steps.length - 1
 
+  // Measure target using viewport coordinates directly (SVG is position:fixed)
   const measureTarget = useCallback(() => {
     if (!current) return
     const el = document.querySelector(`[data-tour="${current.target}"]`)
     if (el) {
       const r = el.getBoundingClientRect()
       setTargetRect({
-        top: r.top + window.scrollY,
-        left: r.left + window.scrollX,
+        top: r.top,
+        left: r.left,
         width: r.width,
         height: r.height,
       })
-      // Scroll element into view
-      el.scrollIntoView({ behavior: 'smooth', block: 'center' })
     } else {
       setTargetRect(null)
     }
@@ -59,17 +58,59 @@ export default function SpotlightTour({ steps, open, onClose, tourName }: Spotli
       setStep(0)
       return
     }
-    // Small delay to let the page render
-    const timer = setTimeout(measureTarget, 300)
-    return () => clearTimeout(timer)
-  }, [open, step, measureTarget])
 
-  // Re-measure on resize
+    const el = document.querySelector(`[data-tour="${current?.target}"]`)
+    if (!el) {
+      const timer = setTimeout(measureTarget, 300)
+      return () => clearTimeout(timer)
+    }
+
+    // First scroll the element into view, then measure after scroll settles
+    el.scrollIntoView({ behavior: 'smooth', block: 'center' })
+
+    // Re-measure repeatedly during scroll to keep cutout aligned
+    let rafId: number
+    let settled = 0
+    let lastTop = -1
+
+    const poll = () => {
+      const r = el.getBoundingClientRect()
+      setTargetRect({ top: r.top, left: r.left, width: r.width, height: r.height })
+
+      // Consider scroll settled when position stops changing
+      if (Math.abs(r.top - lastTop) < 1) {
+        settled++
+      } else {
+        settled = 0
+      }
+      lastTop = r.top
+
+      if (settled < 10) {
+        rafId = requestAnimationFrame(poll)
+      }
+    }
+
+    // Start polling after a brief delay to let scrollIntoView begin
+    const timer = setTimeout(() => {
+      rafId = requestAnimationFrame(poll)
+    }, 50)
+
+    return () => {
+      clearTimeout(timer)
+      cancelAnimationFrame(rafId)
+    }
+  }, [open, step, current, measureTarget])
+
+  // Re-measure on resize and scroll
   useEffect(() => {
     if (!open) return
     const handler = () => measureTarget()
     window.addEventListener('resize', handler)
-    return () => window.removeEventListener('resize', handler)
+    window.addEventListener('scroll', handler, true)
+    return () => {
+      window.removeEventListener('resize', handler)
+      window.removeEventListener('scroll', handler, true)
+    }
   }, [open, measureTarget])
 
   if (!open || !current) return null
@@ -86,54 +127,46 @@ export default function SpotlightTour({ steps, open, onClose, tourName }: Spotli
     if (!isFirst) setStep((s) => s - 1)
   }
 
-  // Calculate tooltip position
+  // Calculate tooltip position (targetRect is already in viewport coordinates)
   const getTooltipStyle = (): React.CSSProperties => {
     if (!targetRect) return { top: '50%', left: '50%', transform: 'translate(-50%, -50%)' }
 
     const pos = current.position || 'bottom'
-    const scrollY = window.scrollY
-    const viewportRect = {
-      top: targetRect.top - scrollY,
-      left: targetRect.left,
-      width: targetRect.width,
-      height: targetRect.height,
-    }
 
     switch (pos) {
       case 'bottom':
         return {
           position: 'fixed',
-          top: viewportRect.top + viewportRect.height + TOOLTIP_GAP,
-          left: Math.max(16, Math.min(viewportRect.left, window.innerWidth - 380)),
+          top: targetRect.top + targetRect.height + PADDING + TOOLTIP_GAP,
+          left: Math.max(16, Math.min(targetRect.left, window.innerWidth - 380)),
           maxWidth: 360,
         }
       case 'top':
         return {
           position: 'fixed',
-          bottom: window.innerHeight - viewportRect.top + TOOLTIP_GAP,
-          left: Math.max(16, Math.min(viewportRect.left, window.innerWidth - 380)),
+          bottom: window.innerHeight - targetRect.top + PADDING + TOOLTIP_GAP,
+          left: Math.max(16, Math.min(targetRect.left, window.innerWidth - 380)),
           maxWidth: 360,
         }
       case 'right':
         return {
           position: 'fixed',
-          top: viewportRect.top,
-          left: viewportRect.left + viewportRect.width + TOOLTIP_GAP,
+          top: targetRect.top,
+          left: targetRect.left + targetRect.width + PADDING + TOOLTIP_GAP,
           maxWidth: 360,
         }
       case 'left':
         return {
           position: 'fixed',
-          top: viewportRect.top,
-          right: window.innerWidth - viewportRect.left + TOOLTIP_GAP,
+          top: targetRect.top,
+          right: window.innerWidth - targetRect.left + PADDING + TOOLTIP_GAP,
           maxWidth: 360,
         }
     }
   }
 
-  // SVG overlay with spotlight cutout
+  // SVG overlay with spotlight cutout (targetRect is already viewport coords)
   const renderOverlay = () => {
-    const scrollY = window.scrollY
     if (!targetRect) {
       return (
         <div className="fixed inset-0 bg-black/60 z-[200] animate-fade-in" onClick={onClose} />
@@ -141,7 +174,7 @@ export default function SpotlightTour({ steps, open, onClose, tourName }: Spotli
     }
 
     const x = targetRect.left - PADDING
-    const y = targetRect.top - scrollY - PADDING
+    const y = targetRect.top - PADDING
     const w = targetRect.width + PADDING * 2
     const h = targetRect.height + PADDING * 2
     const r = 12
