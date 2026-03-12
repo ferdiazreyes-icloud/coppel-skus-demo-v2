@@ -103,8 +103,9 @@ export default function Tab1InfoGeneral() {
       {/* Origen */}
       <FormSection title="Origen" onSave={handleSave}>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <Select label="Origen" options={ORIGINS} />
+          <Select label="Origen" options={ORIGINS} value="importacion" />
           <Select label="País de origen" options={COUNTRIES} required />
+          <Input label="Empresa importadora" placeholder="Nombre de la empresa importadora" required />
         </div>
       </FormSection>
 

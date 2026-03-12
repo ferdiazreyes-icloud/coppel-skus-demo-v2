@@ -2,7 +2,7 @@
 
 > Demo funcional del portal SGC (Sistema de Gestión Comercial) de Coppel para gestionar propuestas y alta de SKU's entre compradores internos y proveedores externos.
 
-**Version:** 1.3.0 (Sprints 0–10 complete)
+**Version:** 1.4.0 (Sprints 0–11 complete)
 **Live demo:** [coppel-skus-demo-v2-production.up.railway.app](https://coppel-skus-demo-v2-production.up.railway.app)
 **Figma reference:** [SKU's_SGC](https://www.figma.com/design/gYTM6PwHzQPGycic3kdIE6/SKU-s_SGC)
 
@@ -118,6 +118,15 @@
 - [x] Reference images in SolicitudDetalle with real product photos
 - [x] Zero placeholder images remaining in codebase
 
+### Sprint 11: Import Product Fields (10-Tab SKU Form)
+- [x] **Tab 1 — Info General:** Added "Empresa importadora" field, Origen defaults to "Importación"
+- [x] **Tab 5 — Datos Logísticos:** Added "Datos de fábrica" section (factory name, country, port, transit time) and "Piezas contenedor y MOQ" section (container type, pieces per container, MOQ)
+- [x] **Tab 6 — Costos y Precios (major overhaul):** New "Precio de venta" section (LCD/MXN prices, interior/frontera proposals), "Arancel" section (fracción arancelaria, Ad Valorem, PROSEC, IMMEX, preferential tariff, compensatory quota), "Gastos importación" with dynamic rows, "Flete" section, "Cálculos comerciales" with Impuestos, Sobreprecios, Comisiones, Factizal, and Factor de utilidad
+- [x] **Tab 9 — Clasificación (NEW):** Product classification (tipo de alta, temporada, segmento), clasificación arancelaria (fracción, NICO), regulaciones y restricciones (NOM)
+- [x] **Tab 10 — Certificaciones (NEW):** NOM certifications with PDF file display, vigencia dates, add/remove certification rows
+- [x] Updated `SKU_TABS` from 8 → 10 tabs, updated `SkuFormData` type
+- [x] `AltaSkuLayout` updated with new tab components
+
 ### Known Limitations
 - Sidebar filters in ListadoPropuestas are visual only (no actual filtering)
 - Form data in SKU tabs is not persisted to mock backend
@@ -134,7 +143,7 @@
 | `/comprador/propuestas/:proveedorId` | ListadoPropuestas | Comprador |
 | `/comprador/propuestas/:proveedorId/:productoId/evaluar` | EvaluacionPropuesta | Comprador |
 | `/comprador/alta-skus` | PropuestasEnAlta | Comprador |
-| `/comprador/alta-skus/:productoId/:tab` | AltaSkuLayout (8 tabs) | Comprador |
+| `/comprador/alta-skus/:productoId/:tab` | AltaSkuLayout (10 tabs) | Comprador |
 | `/proveedor` | HomeProveedor | Proveedor |
 | `/proveedor/solicitudes` | HistorialSolicitudes | Proveedor |
 | `/proveedor/solicitudes/:solicitudId` | SolicitudDetalle | Proveedor |

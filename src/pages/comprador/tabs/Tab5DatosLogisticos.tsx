@@ -28,6 +28,8 @@ export default function Tab5DatosLogisticos() {
   const { markTabComplete } = useSkuFormStore()
   const [pieces, setPieces] = useState(1)
   const [masterQty, setMasterQty] = useState(1)
+  const [pcsContainer, setPcsContainer] = useState(500)
+  const [moq, setMoq] = useState(1000)
 
   const handleSave = () => {
     markTabComplete('datos-logisticos')
@@ -35,6 +37,39 @@ export default function Tab5DatosLogisticos() {
 
   return (
     <div className="space-y-5">
+      {/* Datos de fábrica */}
+      <FormSection title="Datos de fábrica" onSave={handleSave}>
+        <p className="text-sm text-text-secondary mb-4">
+          Información del fabricante y origen de producción del producto importado.
+        </p>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <Input label="Nombre de fábrica" placeholder="Nombre del fabricante" required />
+          <Input label="País de fabricación" placeholder="China" required />
+          <Input label="Puerto de embarque" placeholder="Shanghai" required />
+          <Input label="Tiempo de tránsito (días)" type="number" placeholder="45" required />
+        </div>
+      </FormSection>
+
+      {/* Piezas contenedor y MOQ */}
+      <FormSection title="Piezas contenedor y MOQ" onSave={handleSave}>
+        <p className="text-sm text-text-secondary mb-4">
+          Define la cantidad de piezas por contenedor y el mínimo de orden (MOQ).
+        </p>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <Select
+            label="Tipo de contenedor"
+            options={[
+              { value: '20ft', label: '20 pies' },
+              { value: '40ft', label: '40 pies' },
+              { value: '40hc', label: '40 pies HC' },
+            ]}
+            required
+          />
+          <NumberInput label="Piezas por contenedor" value={pcsContainer} onChange={setPcsContainer} min={1} required />
+          <NumberInput label="MOQ (mínimo de orden)" value={moq} onChange={setMoq} min={1} required />
+        </div>
+      </FormSection>
+
       {/* Datos logísticos */}
       <FormSection title="Datos logísticos" onSave={handleSave}>
         <p className="text-sm text-text-secondary mb-4">

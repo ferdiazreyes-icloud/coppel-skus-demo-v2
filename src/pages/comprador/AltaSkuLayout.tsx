@@ -17,6 +17,8 @@ import Tab5DatosLogisticos from './tabs/Tab5DatosLogisticos'
 import Tab6CostosPrecios from './tabs/Tab6CostosPrecios'
 import Tab7AdminStock from './tabs/Tab7AdminStock'
 import Tab8Configuracion from './tabs/Tab8Configuracion'
+import Tab9Clasificacion from './tabs/Tab9Clasificacion'
+import Tab10Certificaciones from './tabs/Tab10Certificaciones'
 
 const tabComponents: Record<SkuTabId, React.ComponentType> = {
   'informacion-general': Tab1InfoGeneral,
@@ -27,6 +29,8 @@ const tabComponents: Record<SkuTabId, React.ComponentType> = {
   'costos-precios': Tab6CostosPrecios,
   'admin-stock': Tab7AdminStock,
   configuracion: Tab8Configuracion,
+  clasificacion: Tab9Clasificacion,
+  certificaciones: Tab10Certificaciones,
 }
 
 export default function AltaSkuLayout() {

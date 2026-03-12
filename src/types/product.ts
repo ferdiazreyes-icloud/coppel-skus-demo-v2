@@ -46,6 +46,8 @@ export interface SkuFormData {
   costosPrecios: Record<string, unknown>
   adminStock: Record<string, unknown>
   configuracion: Record<string, unknown>
+  clasificacion: Record<string, unknown>
+  certificaciones: Record<string, unknown>
 }
 
 export const SKU_TABS = [
@@ -54,9 +56,11 @@ export const SKU_TABS = [
   { id: 'datos-por-color', label: 'Datos por color', index: 2 },
   { id: 'atributos', label: 'Atributos', index: 3 },
   { id: 'datos-logisticos', label: 'Datos logísticos y de empaque', index: 4 },
-  { id: 'costos-precios', label: 'Costos y precio de venta', index: 5 },
+  { id: 'costos-precios', label: 'Costos y precios de venta', index: 5 },
   { id: 'admin-stock', label: 'Administración de stock', index: 6 },
   { id: 'configuracion', label: 'Configuración', index: 7 },
+  { id: 'clasificacion', label: 'Clasificación', index: 8 },
+  { id: 'certificaciones', label: 'Certificaciones', index: 9 },
 ] as const
 
 export type SkuTabId = typeof SKU_TABS[number]['id']
