@@ -55,7 +55,7 @@ export default function EvaluacionPropuesta() {
       <div className="px-6 pb-10">
         <div className="max-w-3xl mx-auto space-y-6">
           {/* Product card */}
-          <div className="bg-bg-card rounded-md border border-border p-6">
+          <div data-tour="product-summary" className="bg-bg-card rounded-md border border-border p-6">
             <div className="flex gap-6">
               {/* Thumbnail */}
               <div className="w-36 h-36 shrink-0 rounded-md overflow-hidden bg-bg-main">
@@ -179,7 +179,7 @@ export default function EvaluacionPropuesta() {
           </div>
 
           {/* Continue button */}
-          <div className="flex justify-center">
+          <div data-tour="sample-request-btn" className="flex justify-center">
             <Button
               variant="primary"
               className="w-full max-w-xs"

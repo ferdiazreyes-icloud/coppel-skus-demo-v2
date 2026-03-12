@@ -20,7 +20,7 @@ export default function HistorialSolicitudes() {
           Historial de solicitudes
         </h1>
 
-        <div className="space-y-4">
+        <div data-tour="solicitudes-list" className="space-y-4">
           {MOCK_SOLICITUDES.map((sol) => (
             <div
               key={sol.id}

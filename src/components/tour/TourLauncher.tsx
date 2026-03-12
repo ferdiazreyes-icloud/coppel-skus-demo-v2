@@ -25,8 +25,8 @@ export default function TourLauncher() {
   const role = useAuthStore((s) => s.role)
 
   if (activeTour || spotlightTour) {
-    // Show spotlight tour if active
-    if (spotlightTour) {
+    // Show spotlight tour if active (role-specific ones only)
+    if (spotlightTour && spotlightTour !== 'crossRole') {
       const steps = spotlightTour === 'comprador' ? COMPRADOR_HOME_STEPS : PROVEEDOR_HOME_STEPS
       return (
         <SpotlightTour
@@ -37,7 +37,7 @@ export default function TourLauncher() {
         />
       )
     }
-    // Slideshow handles its own rendering via TourSlideshow in PageLayout
+    // CrossRoleTour handles its own rendering via PageLayout
     return null
   }
 

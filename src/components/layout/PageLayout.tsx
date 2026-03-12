@@ -1,11 +1,14 @@
 import { Outlet } from 'react-router-dom'
 import Navbar from './Navbar'
 import Footer from './Footer'
-import TourSlideshow from '../tour/TourSlideshow'
 import TourLauncher from '../tour/TourLauncher'
 import TourAutoStart from '../tour/TourAutoStart'
+import CrossRoleTour from '../tour/CrossRoleTour'
+import { useTourStore } from '../../stores/useTourStore'
 
 export default function PageLayout() {
+  const { activeTour, endTour } = useTourStore()
+
   return (
     <div className="min-h-screen flex flex-col">
       <Navbar />
@@ -14,7 +17,10 @@ export default function PageLayout() {
       </main>
       <Footer />
       <TourAutoStart />
-      <TourSlideshow />
+      <CrossRoleTour
+        open={activeTour === 'crossRole'}
+        onClose={endTour}
+      />
       <TourLauncher />
     </div>
   )

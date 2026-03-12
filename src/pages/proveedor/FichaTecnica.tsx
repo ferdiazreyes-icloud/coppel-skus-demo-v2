@@ -39,7 +39,7 @@ export default function FichaTecnica() {
       <div className="px-6 pb-10">
         <div className="max-w-3xl mx-auto space-y-6">
           {/* Product header */}
-          <div className="bg-bg-card rounded-md border border-border p-6">
+          <div data-tour="ficha-header" className="bg-bg-card rounded-md border border-border p-6">
             <div className="flex gap-6">
               <div className="w-40 h-40 shrink-0 rounded-md overflow-hidden bg-bg-main">
                 <img

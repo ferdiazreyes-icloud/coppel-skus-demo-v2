@@ -1,14 +1,16 @@
+import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { PlayCircle } from 'lucide-react'
 import { useAuthStore } from '../stores/useAuthStore'
 import { useTourStore } from '../stores/useTourStore'
 import CoppelLogo from '../components/ui/CoppelLogo'
-import TourSlideshow from '../components/tour/TourSlideshow'
+import CrossRoleTour from '../components/tour/CrossRoleTour'
 
 export default function RoleSelector() {
   const navigate = useNavigate()
   const setRole = useAuthStore((s) => s.setRole)
-  const startTour = useTourStore((s) => s.startTour)
+  const { startTour, endTour } = useTourStore()
+  const [showCrossRoleTour, setShowCrossRoleTour] = useState(false)
 
   const handleSelect = (role: 'comprador' | 'proveedor') => {
     setRole(role)
@@ -33,7 +35,10 @@ export default function RoleSelector() {
         {/* Demo tour button */}
         <div className="flex justify-center mb-8">
           <button
-            onClick={() => startTour('crossRole')}
+            onClick={() => {
+              startTour('crossRole')
+              setShowCrossRoleTour(true)
+            }}
             className="flex items-center gap-2 px-5 py-2.5 rounded-pill bg-coppel-navy text-white text-sm font-semibold hover:bg-coppel-blue transition-colors"
           >
             <PlayCircle className="w-5 h-5" />
@@ -95,7 +100,15 @@ export default function RoleSelector() {
         </div>
       </div>
 
-      <TourSlideshow />
+      <CrossRoleTour
+        open={showCrossRoleTour}
+        onClose={() => {
+          setShowCrossRoleTour(false)
+          endTour()
+          // Navigate back to role selector
+          navigate('/')
+        }}
+      />
     </div>
   )
 }

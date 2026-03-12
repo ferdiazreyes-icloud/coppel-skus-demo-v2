@@ -64,6 +64,7 @@ export default function AltaSkuLayout() {
 
       <div className="px-6 pb-10 space-y-5">
         {/* Product header */}
+        <div data-tour="product-header">
         <ProductHeader
           name={product.name}
           lineCode={product.classCode}
@@ -81,8 +82,10 @@ export default function AltaSkuLayout() {
           onCancel={() => navigate('/comprador/alta-skus')}
           onSubmit={() => setShowConfirm(true)}
         />
+        </div>
 
         {/* Tab navigation */}
+        <div data-tour="sku-tabs">
         <Tabs
           tabs={SKU_TABS.map((t) => ({ id: t.id, label: t.label }))}
           activeTab={activeTab}
@@ -91,6 +94,7 @@ export default function AltaSkuLayout() {
           }
           completedTabs={completedTabs as unknown as Set<string>}
         />
+        </div>
 
         {/* Tab content */}
         <TabContent />

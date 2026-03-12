@@ -58,7 +58,7 @@ export default function CargaIndividual() {
           </h1>
 
           {/* Product type selector */}
-          <div className="bg-bg-card rounded-md border border-border p-5">
+          <div data-tour="product-type" className="bg-bg-card rounded-md border border-border p-5">
             <Select
               label="Tipo de producto"
               options={PRODUCT_TYPES}
@@ -126,7 +126,7 @@ export default function CargaIndividual() {
           </FormSection>
 
           {/* Action buttons */}
-          <div className="flex items-center justify-between">
+          <div data-tour="save-buttons" className="flex items-center justify-between">
             <Button
               variant="danger"
               icon={<Trash2 className="w-4 h-4" />}

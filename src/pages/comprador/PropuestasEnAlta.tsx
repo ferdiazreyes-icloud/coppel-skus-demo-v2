@@ -106,7 +106,7 @@ export default function PropuestasEnAlta() {
         </div>
 
         {/* Category tabs */}
-        <div className="flex gap-1 mb-6">
+        <div data-tour="category-tabs" className="flex gap-1 mb-6">
           {categoryTabs.map((tab) => (
             <button
               key={tab.id}
@@ -126,7 +126,7 @@ export default function PropuestasEnAlta() {
         </div>
 
         {/* Table */}
-        <div className="bg-bg-card rounded-md border border-border overflow-hidden">
+        <div data-tour="products-table" className="bg-bg-card rounded-md border border-border overflow-hidden">
           <Table
             columns={columns as unknown as Column<Record<string, unknown>>[]}
             data={products as unknown as Record<string, unknown>[]}

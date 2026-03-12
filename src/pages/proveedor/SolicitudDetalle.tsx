@@ -54,7 +54,7 @@ export default function SolicitudDetalle() {
           </div>
 
           {/* Specifications */}
-          <div className="bg-bg-card rounded-md border border-border p-6">
+          <div data-tour="buyer-specs" className="bg-bg-card rounded-md border border-border p-6">
             <h3 className="font-sans text-base font-semibold text-text-primary mb-3">
               Especificaciones del comprador
             </h3>
@@ -120,7 +120,7 @@ export default function SolicitudDetalle() {
               Carga los productos que interesaron al comprador. Si son pocos, hazlo de forma
               individual. Si son muchos, usa la plantilla de Excel para carga masiva.
             </p>
-            <div className="flex gap-3">
+            <div data-tour="carga-buttons" className="flex gap-3">
               <Button
                 variant="outline"
                 onClick={() => navigate(`/proveedor/solicitudes/${solicitudId}/carga-individual`)}

@@ -61,7 +61,7 @@ export default function ListadoPropuestas() {
 
         <div className="flex gap-6">
           {/* ═══ SIDEBAR ═══ */}
-          <aside className="w-[333px] shrink-0 space-y-5">
+          <aside data-tour="filter-sidebar" className="w-[333px] shrink-0 space-y-5">
             {/* Category dropdowns */}
             <div className="bg-bg-card rounded-md border border-border p-5 space-y-4">
               <Select label="Categoría" options={CATEGORIES} placeholder="Selecciona" />
@@ -208,7 +208,7 @@ export default function ListadoPropuestas() {
             </div>
 
             {/* Product list */}
-            <div className="space-y-4">
+            <div data-tour="product-list" className="space-y-4">
               {products.map((product) => (
                 <ProductCard
                   key={product.id}
