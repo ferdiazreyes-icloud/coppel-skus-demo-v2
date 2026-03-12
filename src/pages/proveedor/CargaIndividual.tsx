@@ -8,6 +8,8 @@ import Select from '../../components/ui/Select'
 import Textarea from '../../components/ui/Textarea'
 import FileUpload from '../../components/ui/FileUpload'
 import Button from '../../components/ui/Button'
+import ConfirmModal from '../../components/ui/ConfirmModal'
+import { useNotificationStore } from '../../stores/useNotificationStore'
 import { MOCK_SOLICITUDES } from '../../data/mockProducts'
 
 const PRODUCT_TYPES = [
@@ -35,6 +37,8 @@ export default function CargaIndividual() {
   const solicitudCode = solicitud?.code || '#000000'
 
   const [productType, setProductType] = useState('muneca')
+  const [showSuccess, setShowSuccess] = useState(false)
+  const { addNotification } = useNotificationStore()
 
   return (
     <div>
@@ -133,11 +137,31 @@ export default function CargaIndividual() {
             <Button
               variant="primary"
               icon={<Save className="w-4 h-4" />}
-              onClick={() => navigate(`/proveedor/solicitudes/${solicitudId}`)}
+              onClick={() => {
+                addNotification({
+                  title: 'Propuesta recibida',
+                  message: `Mattel S.A. de C.V. ha enviado una nueva propuesta de producto.`,
+                  targetRole: 'comprador',
+                  link: '/comprador/propuestas/sup-001',
+                })
+                setShowSuccess(true)
+              }}
             >
               Guardar
             </Button>
           </div>
+
+          <ConfirmModal
+            open={showSuccess}
+            onClose={() => {
+              setShowSuccess(false)
+              navigate(`/proveedor/solicitudes/${solicitudId}`)
+            }}
+            onConfirm={() => {}}
+            title="Propuesta guardada"
+            message="Tu propuesta ha sido guardada y enviada al comprador exitosamente."
+            variant="success"
+          />
         </div>
       </div>
     </div>

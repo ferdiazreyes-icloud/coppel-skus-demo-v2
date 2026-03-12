@@ -1,13 +1,20 @@
-import { useParams } from 'react-router-dom'
+import { useState } from 'react'
+import { useParams, useNavigate } from 'react-router-dom'
 import { Edit3, Send } from 'lucide-react'
 import Breadcrumb from '../../components/layout/Breadcrumb'
 import Button from '../../components/ui/Button'
 import Badge from '../../components/ui/Badge'
+import ConfirmModal from '../../components/ui/ConfirmModal'
+import { useNotificationStore } from '../../stores/useNotificationStore'
 import { MOCK_PRODUCTS } from '../../data/mockProducts'
 import { formatCurrency, formatPercent } from '../../utils/formatCurrency'
 
 export default function FichaTecnica() {
   const { propuestaId } = useParams()
+  const navigate = useNavigate()
+  const { addNotification } = useNotificationStore()
+  const [showConfirm, setShowConfirm] = useState(false)
+  const [showSuccess, setShowSuccess] = useState(false)
 
   const product = MOCK_PRODUCTS.find((p) => p.id === propuestaId)
 
@@ -57,7 +64,12 @@ export default function FichaTecnica() {
                   <Button variant="outline" size="sm" icon={<Edit3 className="w-4 h-4" />}>
                     Editar
                   </Button>
-                  <Button variant="primary" size="sm" icon={<Send className="w-4 h-4" />}>
+                  <Button
+                    variant="primary"
+                    size="sm"
+                    icon={<Send className="w-4 h-4" />}
+                    onClick={() => setShowConfirm(true)}
+                  >
                     Enviar a revisión
                   </Button>
                 </div>
@@ -181,6 +193,36 @@ export default function FichaTecnica() {
           </div>
         </div>
       </div>
+
+      <ConfirmModal
+        open={showConfirm}
+        onClose={() => setShowConfirm(false)}
+        title="Enviar a revisión"
+        message={`¿Deseas enviar "${product.name}" a revisión del comprador?`}
+        confirmLabel="Enviar"
+        onConfirm={() => {
+          setShowConfirm(false)
+          addNotification({
+            title: 'Propuesta enviada a revisión',
+            message: `Mattel S.A. de C.V. ha enviado "${product.name}" para tu revisión.`,
+            targetRole: 'comprador',
+            link: `/comprador/propuestas/sup-001`,
+          })
+          setShowSuccess(true)
+        }}
+      />
+
+      <ConfirmModal
+        open={showSuccess}
+        onClose={() => {
+          setShowSuccess(false)
+          navigate('/proveedor/solicitudes')
+        }}
+        onConfirm={() => {}}
+        title="Enviado exitosamente"
+        message="La propuesta ha sido enviada al comprador para su revisión."
+        variant="success"
+      />
     </div>
   )
 }

@@ -1,8 +1,11 @@
+import { useState } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import Breadcrumb from '../../components/layout/Breadcrumb'
 import ProductHeader from '../../components/shared/ProductHeader'
 import Tabs from '../../components/ui/Tabs'
+import ConfirmModal from '../../components/ui/ConfirmModal'
 import { useSkuFormStore } from '../../stores/useSkuFormStore'
+import { useNotificationStore } from '../../stores/useNotificationStore'
 import { MOCK_PRODUCTS } from '../../data/mockProducts'
 import { SKU_TABS, type SkuTabId } from '../../types/product'
 
@@ -30,6 +33,9 @@ export default function AltaSkuLayout() {
   const { productoId, tab } = useParams()
   const navigate = useNavigate()
   const { completedTabs } = useSkuFormStore()
+  const { addNotification } = useNotificationStore()
+  const [showConfirm, setShowConfirm] = useState(false)
+  const [showSuccess, setShowSuccess] = useState(false)
 
   const product = MOCK_PRODUCTS.find((p) => p.id === productoId)
   const activeTab = (tab || 'informacion-general') as SkuTabId
@@ -73,7 +79,7 @@ export default function AltaSkuLayout() {
           images={[product.imageUrl]}
           canSubmit={allComplete}
           onCancel={() => navigate('/comprador/alta-skus')}
-          onSubmit={() => navigate('/comprador/alta-skus')}
+          onSubmit={() => setShowConfirm(true)}
         />
 
         {/* Tab navigation */}
@@ -89,6 +95,42 @@ export default function AltaSkuLayout() {
         {/* Tab content */}
         <TabContent />
       </div>
+
+      {/* Confirm alta */}
+      <ConfirmModal
+        open={showConfirm}
+        onClose={() => setShowConfirm(false)}
+        title="Dar de alta SKU"
+        message={`¿Estás segura de dar de alta el SKU "${product.name}"? Esta acción no se puede deshacer.`}
+        confirmLabel="Dar de alta"
+        onConfirm={() => {
+          setShowConfirm(false)
+          addNotification({
+            title: 'SKU dado de alta',
+            message: `${product.name} ha sido dado de alta exitosamente por Juanita Solis.`,
+            targetRole: 'proveedor',
+          })
+          addNotification({
+            title: 'SKU dado de alta',
+            message: `${product.name} ha sido dado de alta exitosamente.`,
+            targetRole: 'comprador',
+          })
+          setShowSuccess(true)
+        }}
+      />
+
+      {/* Success */}
+      <ConfirmModal
+        open={showSuccess}
+        onClose={() => {
+          setShowSuccess(false)
+          navigate('/comprador/alta-skus')
+        }}
+        onConfirm={() => {}}
+        title="Alta exitosa"
+        message={`El SKU "${product.name}" ha sido dado de alta exitosamente en el sistema.`}
+        variant="success"
+      />
     </div>
   )
 }

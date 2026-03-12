@@ -8,6 +8,8 @@ import DateRangePicker from '../../components/ui/DateRangePicker'
 import Checkbox from '../../components/ui/Checkbox'
 import Button from '../../components/ui/Button'
 import Badge from '../../components/ui/Badge'
+import ConfirmModal from '../../components/ui/ConfirmModal'
+import { useNotificationStore } from '../../stores/useNotificationStore'
 import { MOCK_PRODUCTS, MOCK_SOLICITUDES } from '../../data/mockProducts'
 import { formatCurrency, formatPercent } from '../../utils/formatCurrency'
 
@@ -26,6 +28,9 @@ export default function EvaluacionPropuesta() {
   const [participaPlaneacion, setParticipaPlaneacion] = useState(false)
   const [solicitarInfo, setSolicitarInfo] = useState(false)
   const [especificarReceptor, setEspecificarReceptor] = useState(false)
+  const [showConfirm, setShowConfirm] = useState(false)
+  const [showSuccess, setShowSuccess] = useState(false)
+  const { addNotification } = useNotificationStore()
 
   if (!product) {
     return (
@@ -178,13 +183,43 @@ export default function EvaluacionPropuesta() {
             <Button
               variant="primary"
               className="w-full max-w-xs"
-              onClick={() => navigate(`/comprador/propuestas/${proveedorId}`)}
+              onClick={() => setShowConfirm(true)}
             >
               Continuar
             </Button>
           </div>
         </div>
       </div>
+
+      <ConfirmModal
+        open={showConfirm}
+        onClose={() => setShowConfirm(false)}
+        title="Solicitar muestra"
+        message={`¿Deseas solicitar muestra de "${product.name}" al proveedor ${supplierName}?`}
+        confirmLabel="Solicitar"
+        onConfirm={() => {
+          setShowConfirm(false)
+          addNotification({
+            title: 'Solicitud de muestra',
+            message: `Juanita Solis ha solicitado muestra de ${product.name}.`,
+            targetRole: 'proveedor',
+            link: '/proveedor/solicitudes/sol-001',
+          })
+          setShowSuccess(true)
+        }}
+      />
+
+      <ConfirmModal
+        open={showSuccess}
+        onClose={() => {
+          setShowSuccess(false)
+          navigate(`/comprador/propuestas/${proveedorId}`)
+        }}
+        onConfirm={() => {}}
+        title="Solicitud enviada"
+        message="La solicitud de muestra ha sido enviada al proveedor exitosamente."
+        variant="success"
+      />
     </div>
   )
 }
