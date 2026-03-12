@@ -1,20 +1,24 @@
-import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { PlayCircle } from 'lucide-react'
 import { useAuthStore } from '../stores/useAuthStore'
 import { useTourStore } from '../stores/useTourStore'
 import CoppelLogo from '../components/ui/CoppelLogo'
-import CrossRoleTour from '../components/tour/CrossRoleTour'
 
 export default function RoleSelector() {
   const navigate = useNavigate()
   const setRole = useAuthStore((s) => s.setRole)
-  const { startTour, endTour } = useTourStore()
-  const [showCrossRoleTour, setShowCrossRoleTour] = useState(false)
+  const startTour = useTourStore((s) => s.startTour)
 
   const handleSelect = (role: 'comprador' | 'proveedor') => {
     setRole(role)
     navigate(role === 'comprador' ? '/comprador' : '/proveedor')
+  }
+
+  const handleStartCrossRoleTour = () => {
+    // Set comprador role and navigate — CrossRoleTour in PageLayout handles the rest
+    setRole('comprador')
+    startTour('crossRole')
+    navigate('/comprador')
   }
 
   return (
@@ -35,10 +39,7 @@ export default function RoleSelector() {
         {/* Demo tour button */}
         <div className="flex justify-center mb-8">
           <button
-            onClick={() => {
-              startTour('crossRole')
-              setShowCrossRoleTour(true)
-            }}
+            onClick={handleStartCrossRoleTour}
             className="flex items-center gap-2 px-5 py-2.5 rounded-pill bg-coppel-navy text-white text-sm font-semibold hover:bg-coppel-blue transition-colors"
           >
             <PlayCircle className="w-5 h-5" />
@@ -57,7 +58,7 @@ export default function RoleSelector() {
               <img
                 src="https://images.pexels.com/photos/3760514/pexels-photo-3760514.jpeg?auto=compress&cs=tinysrgb&w=100"
                 alt="Juanita Solis"
-                className="w-16 h-16 rounded-full object-cover border-3 border-coppel-blue-light group-hover:border-coppel-blue transition-colors"
+                className="w-16 h-16 rounded-full object-cover border-[3px] border-coppel-blue-light group-hover:border-coppel-blue transition-colors"
               />
               <div>
                 <h2 className="font-sans text-xl font-semibold text-coppel-navy">
@@ -82,7 +83,7 @@ export default function RoleSelector() {
               <img
                 src="https://images.pexels.com/photos/7841788/pexels-photo-7841788.jpeg?auto=compress&cs=tinysrgb&w=100"
                 alt="Felipe López"
-                className="w-16 h-16 rounded-full object-cover border-3 border-coppel-blue-light group-hover:border-coppel-blue transition-colors"
+                className="w-16 h-16 rounded-full object-cover border-[3px] border-coppel-blue-light group-hover:border-coppel-blue transition-colors"
               />
               <div>
                 <h2 className="font-sans text-xl font-semibold text-coppel-navy">
@@ -99,16 +100,6 @@ export default function RoleSelector() {
           </button>
         </div>
       </div>
-
-      <CrossRoleTour
-        open={showCrossRoleTour}
-        onClose={() => {
-          setShowCrossRoleTour(false)
-          endTour()
-          // Navigate back to role selector
-          navigate('/')
-        }}
-      />
     </div>
   )
 }
