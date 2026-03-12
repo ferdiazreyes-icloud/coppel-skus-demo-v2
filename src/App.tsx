@@ -7,6 +7,12 @@ import EvaluacionPropuesta from './pages/comprador/EvaluacionPropuesta'
 import PropuestasEnAlta from './pages/comprador/PropuestasEnAlta'
 import AltaSkuLayout from './pages/comprador/AltaSkuLayout'
 import HomeProveedor from './pages/proveedor/HomeProveedor'
+import HistorialSolicitudes from './pages/proveedor/HistorialSolicitudes'
+import SolicitudDetalle from './pages/proveedor/SolicitudDetalle'
+import CargaIndividual from './pages/proveedor/CargaIndividual'
+import CargaMasiva from './pages/proveedor/CargaMasiva'
+import VistaRapidaPropuestas from './pages/proveedor/VistaRapidaPropuestas'
+import FichaTecnica from './pages/proveedor/FichaTecnica'
 
 export default function App() {
   return (
@@ -27,13 +33,12 @@ export default function App() {
         {/* Proveedor Routes */}
         <Route element={<PageLayout />}>
           <Route path="/proveedor" element={<HomeProveedor />} />
-          {/* Sprint 5 */}
-          {/* <Route path="/proveedor/solicitudes" element={<HistorialSolicitudes />} /> */}
-          {/* <Route path="/proveedor/solicitudes/:solicitudId" element={<SolicitudDetalle />} /> */}
-          {/* <Route path="/proveedor/solicitudes/:solicitudId/carga-individual" element={<CargaIndividual />} /> */}
-          {/* <Route path="/proveedor/solicitudes/:solicitudId/carga-masiva" element={<CargaMasiva />} /> */}
-          {/* <Route path="/proveedor/propuestas" element={<VistaRapidaPropuestas />} /> */}
-          {/* <Route path="/proveedor/propuestas/:propuestaId" element={<FichaTecnica />} /> */}
+          <Route path="/proveedor/solicitudes" element={<HistorialSolicitudes />} />
+          <Route path="/proveedor/solicitudes/:solicitudId" element={<SolicitudDetalle />} />
+          <Route path="/proveedor/solicitudes/:solicitudId/carga-individual" element={<CargaIndividual />} />
+          <Route path="/proveedor/solicitudes/:solicitudId/carga-masiva" element={<CargaMasiva />} />
+          <Route path="/proveedor/propuestas" element={<VistaRapidaPropuestas />} />
+          <Route path="/proveedor/propuestas/:propuestaId" element={<FichaTecnica />} />
         </Route>
 
         {/* Fallback */}
