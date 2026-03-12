@@ -2,7 +2,8 @@
 
 > Demo funcional del portal SGC (Sistema de Gestión Comercial) de Coppel para gestionar propuestas y alta de SKU's entre compradores internos y proveedores externos.
 
-**Version:** 1.0.0 (All sprints complete)
+**Version:** 1.2.0 (Sprints 0–9 complete)
+**Live demo:** [coppel-skus-demo-v2-production.up.railway.app](https://coppel-skus-demo-v2-production.up.railway.app)
 **Figma reference:** [SKU's_SGC](https://www.figma.com/design/gYTM6PwHzQPGycic3kdIE6/SKU-s_SGC)
 
 ---
@@ -15,7 +16,7 @@
 | TypeScript | Type safety |
 | Tailwind CSS v4 | Pixel-perfect styling with design tokens |
 | React Router v7 | Client-side routing with nested layouts |
-| Zustand | Global state (auth, SKU form, notifications) |
+| Zustand | Global state (auth, SKU form, notifications, tours) |
 | Lucide React | Icon library |
 
 ---
@@ -79,19 +80,24 @@
 - [x] Coppel logo corrected (circles large→medium→small left to right)
 - [x] Deployed to Railway
 
-### Sprint 8: Interactive Guided Tours
-- [x] **TourSlideshow** — Modal walkthrough with icons, progress bar, tips, navigation
-- [x] **TourLauncher** — Floating "?" button with tour menu (shows "Visto" badge)
-- [x] **TourAutoStart** — Auto-launches role tour on first visit (localStorage)
-- [x] 3 tours: Comprador (8 steps), Proveedor (6 steps), Cross-role flow (5 steps)
+### Sprint 8: Interactive Guided Tours (Spotlight + Slideshow)
+- [x] **SpotlightTour** — SVG overlay with cutout highlighting real page elements, yellow pulsing border, tooltip with progress bar
+- [x] **WelcomeModal** — "Iniciar tour" / "No, ya conozco el portal" on first visit per role
+- [x] **TourSlideshow** — Modal walkthrough for cross-role flow (icons, tips, navigation)
+- [x] **TourLauncher** — Floating "?" FAB button with tour menu and "Visto" badges
+- [x] **TourAutoStart** — Auto-shows Welcome + Spotlight on first visit (persisted in localStorage)
+- [x] 3 tours: Comprador spotlight (6 steps), Proveedor spotlight (6 steps), Cross-role slideshow (5 steps)
 - [x] "Ver demo guiada" button on RoleSelector for cross-role tour
+- [x] `data-tour` attributes on key elements: greeting, banner, quick-actions, feature-cards, notifications, user-avatar, solicitudes, mi-cuenta
 
 ### Sprint 9: Real Images
-- [x] 10 real product photos from Mattel/Prinsel CDN
-- [x] Banner images with gradient overlay and text
-- [x] Home cards with real warehouse, inventory, office photos
-- [x] Profile photos for Juanita Solis and Felipe López
-- [x] Zero placeholder images remaining
+- [x] 10 real product photos from Mattel/Prinsel CDN (Wicked, Frozen, Moana, Barbie, Monster High, Prinsel Push Car)
+- [x] Banner images with gradient overlay and text (Pexels stock photos)
+- [x] Home Comprador cards: warehouse, inventory check, office teamwork
+- [x] Home Proveedor cards: box shelves, business meeting
+- [x] Profile photos for Juanita Solis and Felipe López in Navbar + RoleSelector
+- [x] Reference images in SolicitudDetalle with real product photos
+- [x] Zero placeholder images remaining in codebase
 
 ### Known Limitations
 - Sidebar filters in ListadoPropuestas are visual only (no actual filtering)
@@ -147,13 +153,14 @@ src/
 ├── components/
 │   ├── layout/          # Navbar, Footer, Breadcrumb, PageLayout
 │   ├── shared/          # FormSection, ProductHeader, FilterSidebar
+│   ├── tour/            # SpotlightTour, TourSlideshow, WelcomeModal, TourLauncher, TourAutoStart
 │   └── ui/              # 20+ reusable UI components
-├── data/                # Mock products, catalog data
+├── data/                # Mock products, catalog, tour step definitions
 ├── pages/
 │   ├── comprador/       # Comprador pages
 │   │   └── tabs/        # 8 SKU form tabs
 │   └── proveedor/       # Proveedor pages
-├── stores/              # Zustand stores (auth, SKU form, notifications)
+├── stores/              # Zustand stores (auth, SKU form, notifications, tours)
 ├── types/               # TypeScript interfaces
 └── utils/               # Formatting helpers
 ```

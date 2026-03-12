@@ -418,9 +418,9 @@ Para cada pantalla, verificar contra el Figma:
 ## Orden de Implementación Recomendado
 
 ```
-Sprint 0 → Sprint 1 → Sprint 2 → Sprint 3 → Sprint 4 → Sprint 5 → Sprint 6 → Sprint 7
-  Setup     Layout     Homes     Listado    Alta SKU   Proveedor   Flujo      Polish
-  (base)    (pixel)    (entry)   (eval)     (forms)    (carga)     (connect)  (deploy)
+Sprint 0 → Sprint 1 → Sprint 2 → Sprint 3 → Sprint 4 → Sprint 5 → Sprint 6 → Sprint 7 → Sprint 8 → Sprint 9
+  Setup     Layout     Homes     Listado    Alta SKU   Proveedor   Flujo      Polish     Tours      Imágenes
+  (base)    (pixel)    (entry)   (eval)     (forms)    (carga)     (connect)  (deploy)   (spotlight) (reales)
 ```
 
 Cada sprint es independiente y demostrable. Después de Sprint 2 ya tienes un demo navegable. Después de Sprint 4 ya tienes el flujo más importante (alta SKU). Sprint 6 es lo que conecta todo.
@@ -428,17 +428,21 @@ Cada sprint es independiente y demostrable. Después de Sprint 2 ya tienes un de
 ---
 
 ### Sprint 8: Tutoriales Interactivos Guiados (1 sesión)
-**Objetivo:** Onboarding interactivo para que cualquier persona entienda el demo.
+**Objetivo:** Onboarding interactivo tipo spotlight (como JLL Torre de Control) para que cualquier persona entienda el demo.
 
 - [x] `useTourStore.ts` — Zustand store con localStorage para tours completados
-- [x] `tourSteps.ts` — Definición de 3 tours: Comprador (8 pasos), Proveedor (6 pasos), Flujo Cruzado (5 pasos)
-- [x] `TourSlideshow.tsx` — Modal slideshow con iconos, barra de progreso, tips, navegación
-- [x] `TourLauncher.tsx` — Botón flotante "?" con menú de tours disponibles y badge "Visto"
-- [x] `TourAutoStart.tsx` — Auto-lanza el tour del rol al entrar por primera vez
+- [x] `tourSteps.ts` — Definición del tour cross-role (5 pasos slideshow)
+- [x] `spotlightSteps.ts` — Spotlight steps por rol: Comprador (6 pasos), Proveedor (6 pasos)
+- [x] `SpotlightTour.tsx` — Overlay SVG con recorte spotlight, borde amarillo pulsante, tooltip posicionado junto al elemento real, barra de progreso, navegación
+- [x] `WelcomeModal.tsx` — Modal de bienvenida "Iniciar tour" / "No, ya conozco el portal"
+- [x] `TourSlideshow.tsx` — Modal slideshow para tour cross-role (iconos, tips, navegación)
+- [x] `TourLauncher.tsx` — Botón flotante "?" con menú de tours y badge "Visto"
+- [x] `TourAutoStart.tsx` — Muestra Welcome modal al entrar por primera vez, luego lanza spotlight
+- [x] `data-tour` attributes en: greeting, banner, quick-actions, feature-cards, notifications, user-avatar, solicitudes, mi-cuenta
 - [x] Botón "Ver demo guiada" en RoleSelector para tour del flujo cruzado
-- [x] Integración en PageLayout (slideshow + launcher + autostart)
+- [x] Integración en PageLayout (spotlight + slideshow + launcher + autostart)
 
-**Entregable:** Tutoriales interactivos accesibles en todo momento desde el botón "?".
+**Entregable:** Tutoriales interactivos con spotlight real sobre elementos de la página, accesibles en todo momento desde el botón "?".
 
 ---
 
