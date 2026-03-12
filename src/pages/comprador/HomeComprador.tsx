@@ -60,7 +60,7 @@ export default function HomeComprador() {
           <div className="absolute inset-0 bg-gradient-to-r from-coppel-blue/70 to-transparent flex items-center px-12">
             <div>
               <h2 className="font-sans text-2xl font-bold text-white leading-tight">
-                Portal de Proveedores
+                Sistema de Gestión de Categorías
               </h2>
               <p className="text-white/90 text-sm mt-2 max-w-sm">
                 Gestiona propuestas, SKU&apos;s y proveedores en un solo lugar
