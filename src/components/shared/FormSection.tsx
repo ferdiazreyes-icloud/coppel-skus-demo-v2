@@ -1,15 +1,11 @@
 import { useState, type ReactNode } from 'react'
 import { ChevronUp, ChevronDown, Save } from 'lucide-react'
-import Toggle from '../ui/Toggle'
 
 interface FormSectionProps {
   title: string
   children: ReactNode
   defaultOpen?: boolean
   showInfoToggle?: boolean
-  infoToggleLabel?: string
-  infoToggleChecked?: boolean
-  onInfoToggleChange?: (checked: boolean) => void
   showSaveButton?: boolean
   onSave?: () => void
   icon?: ReactNode
@@ -20,10 +16,6 @@ export default function FormSection({
   title,
   children,
   defaultOpen = true,
-  showInfoToggle = false,
-  infoToggleLabel = 'Info. SKU de referencia',
-  infoToggleChecked = false,
-  onInfoToggleChange,
   showSaveButton = true,
   onSave,
   icon,
@@ -42,22 +34,11 @@ export default function FormSection({
           <h3 className="font-sans text-base font-semibold text-text-primary">{title}</h3>
           {icon && <span className="text-coppel-blue">{icon}</span>}
         </div>
-        <div className="flex items-center gap-4">
-          {showInfoToggle && (
-            <div onClick={(e) => e.stopPropagation()}>
-              <Toggle
-                label={infoToggleLabel}
-                checked={infoToggleChecked}
-                onChange={(v) => onInfoToggleChange?.(v)}
-              />
-            </div>
-          )}
-          {isOpen ? (
-            <ChevronUp className="w-5 h-5 text-text-muted" />
-          ) : (
-            <ChevronDown className="w-5 h-5 text-text-muted" />
-          )}
-        </div>
+        {isOpen ? (
+          <ChevronUp className="w-5 h-5 text-text-muted" />
+        ) : (
+          <ChevronDown className="w-5 h-5 text-text-muted" />
+        )}
       </div>
 
       {/* Content */}
