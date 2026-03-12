@@ -13,25 +13,25 @@ interface Rect {
 
 const PADDING = 12
 const TOOLTIP_GAP = 16
-const MAX_SPOTLIGHT_HEIGHT = 500 // Cap the spotlight height for very tall elements
+const MAX_SPOTLIGHT_HEIGHT = 500
+
+type Phase = 'transition' | 'measuring' | 'ready'
 
 export default function CrossRoleTour({ open, onClose }: { open: boolean; onClose: () => void }) {
   const [step, setStep] = useState(0)
   const [targetRect, setTargetRect] = useState<Rect | null>(null)
-  const [transitioning, setTransitioning] = useState(false)
+  const [phase, setPhase] = useState<Phase>('measuring')
   const [transitionLabel, setTransitionLabel] = useState('')
   const tooltipRef = useRef<HTMLDivElement>(null)
   const navigate = useNavigate()
   const location = useLocation()
   const setRole = useAuthStore((s) => s.setRole)
-  const prevRouteRef = useRef('')
 
   const current = CROSS_ROLE_STEPS[step]
   const isFirst = step === 0
   const isLast = step === CROSS_ROLE_STEPS.length - 1
   const totalSteps = CROSS_ROLE_STEPS.length
 
-  // Clamp rect to viewport and cap height
   const clampRect = useCallback((r: DOMRect): Rect => {
     const top = Math.max(0, r.top)
     const left = Math.max(0, r.left)
@@ -42,8 +42,9 @@ export default function CrossRoleTour({ open, onClose }: { open: boolean; onClos
     return { top, left, width: Math.max(width, 0), height: Math.max(height, 0) }
   }, [])
 
-  const measureAndTrack = useCallback(
-    (target: string) => {
+  // Try to find and measure the target element, returns cleanup function or false
+  const startMeasuring = useCallback(
+    (target: string): (() => void) | false => {
       const el = document.querySelector(`[data-tour="${target}"]`)
       if (!el) return false
 
@@ -66,6 +67,8 @@ export default function CrossRoleTour({ open, onClose }: { open: boolean; onClos
 
         if (settled < 15) {
           rafId = requestAnimationFrame(poll)
+        } else {
+          setPhase('ready')
         }
       }
 
@@ -75,66 +78,68 @@ export default function CrossRoleTour({ open, onClose }: { open: boolean; onClos
     [clampRect]
   )
 
-  // Navigate to the correct route and measure the target
+  // Main effect: orchestrate navigation and measuring
   useEffect(() => {
-    if (!open || !current || transitioning) return
+    if (!open || !current) return
 
     // Switch role if needed
     if (current.role) {
       setRole(current.role)
     }
 
-    // Check if we need to navigate
-    const needsNav = location.pathname !== current.route
-    if (needsNav) {
-      // Show transition screen
+    const onCorrectRoute = location.pathname === current.route
+
+    // CASE 1: Need to navigate to a different route
+    if (!onCorrectRoute) {
+      // Show transition briefly, then navigate
       const isRoleSwitch = !!current.role
-      const prevRoute = prevRouteRef.current
-      const nextPageName = current.title.replace(/^\d+\.\s*/, '')
-
-      if (isRoleSwitch) {
-        setTransitionLabel(`Cambiando a ${current.role === 'comprador' ? 'Comprador' : 'Proveedor'}...`)
-      } else if (prevRoute !== current.route) {
-        setTransitionLabel(`Navegando a: ${nextPageName}`)
-      }
-
-      setTransitioning(true)
+      const label = isRoleSwitch
+        ? `Cambiando a ${current.role === 'comprador' ? 'Comprador' : 'Proveedor'}...`
+        : `Navegando a: ${current.title.replace(/^\d+\.\s*/, '')}`
+      setTransitionLabel(label)
+      setPhase('transition')
       setTargetRect(null)
 
+      const delay = isRoleSwitch ? 1000 : 600
       const timer = setTimeout(() => {
         navigate(current.route)
-        prevRouteRef.current = current.route
-        setTransitioning(false)
-      }, isRoleSwitch ? 1200 : 700)
+        // Phase will advance to 'measuring' when location changes and we re-enter this effect
+      }, delay)
 
       return () => clearTimeout(timer)
     }
 
-    // Already on the right route — find and measure
-    prevRouteRef.current = current.route
+    // CASE 2: On the correct route — find and measure the target
+    setPhase('measuring')
 
     let cleanup: (() => void) | false = false
-    const timer = setTimeout(() => {
-      cleanup = measureAndTrack(current.target)
+    let retryTimer: ReturnType<typeof setTimeout>
+
+    // Give DOM time to render after navigation
+    const initialTimer = setTimeout(() => {
+      cleanup = startMeasuring(current.target)
       if (!cleanup) {
-        // Element not found yet, retry with longer delay
-        const retry = setTimeout(() => {
-          cleanup = measureAndTrack(current.target)
-        }, 600)
-        return () => clearTimeout(retry)
+        // Retry once more
+        retryTimer = setTimeout(() => {
+          cleanup = startMeasuring(current.target)
+          if (!cleanup) {
+            // Element not found — show tooltip centered anyway
+            setPhase('ready')
+          }
+        }, 500)
       }
-    }, 300)
+    }, 250)
 
     return () => {
-      clearTimeout(timer)
+      clearTimeout(initialTimer)
+      clearTimeout(retryTimer)
       if (cleanup) cleanup()
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [open, step, location.pathname, transitioning])
+  }, [open, step, location.pathname, current, setRole, navigate, startMeasuring])
 
-  // Re-measure on scroll
+  // Re-measure on scroll/resize
   useEffect(() => {
-    if (!open || !current || transitioning) return
+    if (!open || !current || phase !== 'ready') return
     const handler = () => {
       const el = document.querySelector(`[data-tour="${current.target}"]`)
       if (el) {
@@ -147,15 +152,14 @@ export default function CrossRoleTour({ open, onClose }: { open: boolean; onClos
       window.removeEventListener('scroll', handler, true)
       window.removeEventListener('resize', handler)
     }
-  }, [open, current, transitioning, clampRect])
+  }, [open, current, phase, clampRect])
 
   // Reset on close
   useEffect(() => {
     if (!open) {
       setStep(0)
       setTargetRect(null)
-      setTransitioning(false)
-      prevRouteRef.current = ''
+      setPhase('measuring')
     }
   }, [open])
 
@@ -166,6 +170,7 @@ export default function CrossRoleTour({ open, onClose }: { open: boolean; onClos
       onClose()
     } else {
       setTargetRect(null)
+      setPhase('measuring')
       setStep((s) => s + 1)
     }
   }
@@ -173,6 +178,7 @@ export default function CrossRoleTour({ open, onClose }: { open: boolean; onClos
   const handlePrev = () => {
     if (!isFirst) {
       setTargetRect(null)
+      setPhase('measuring')
       setStep((s) => s - 1)
     }
   }
@@ -181,8 +187,8 @@ export default function CrossRoleTour({ open, onClose }: { open: boolean; onClos
   const currentRole = current.role || (step > 0 ? CROSS_ROLE_STEPS.slice(0, step).reverse().find(s => s.role)?.role : undefined) || 'comprador'
   const roleLabel = currentRole === 'comprador' ? '👩 Comprador' : '👨 Proveedor'
 
-  // Transition screen between pages
-  if (transitioning) {
+  // ── TRANSITION SCREEN ──
+  if (phase === 'transition') {
     return (
       <div className="fixed inset-0 z-[200] flex items-center justify-center bg-black/80 animate-fade-in">
         <div className="text-center animate-scale-in">
@@ -200,14 +206,13 @@ export default function CrossRoleTour({ open, onClose }: { open: boolean; onClos
     )
   }
 
+  // ── TOOLTIP POSITIONING ──
   const getTooltipStyle = (): React.CSSProperties => {
     if (!targetRect) return { top: '50%', left: '50%', transform: 'translate(-50%, -50%)' }
 
     const pos = current.position || 'bottom'
     const spotBottom = targetRect.top + targetRect.height + PADDING + TOOLTIP_GAP
     const spaceBelow = window.innerHeight - spotBottom
-
-    // If tooltip would go off screen below, force to top
     const effectivePos = pos === 'bottom' && spaceBelow < 220 ? 'top' : pos
 
     switch (effectivePos) {
@@ -242,11 +247,10 @@ export default function CrossRoleTour({ open, onClose }: { open: boolean; onClos
     }
   }
 
+  // ── SVG OVERLAY ──
   const renderOverlay = () => {
     if (!targetRect) {
-      return (
-        <div className="fixed inset-0 bg-black/60 z-[200] animate-fade-in" />
-      )
+      return <div className="fixed inset-0 bg-black/60 z-[200] animate-fade-in" />
     }
 
     const x = targetRect.left - PADDING
@@ -272,7 +276,6 @@ export default function CrossRoleTour({ open, onClose }: { open: boolean; onClos
           mask="url(#cross-tour-mask)"
           style={{ pointerEvents: 'auto' }}
         />
-        {/* Highlight border */}
         <rect
           x={x} y={y} width={w} height={h}
           rx={r} ry={r}
@@ -323,10 +326,11 @@ export default function CrossRoleTour({ open, onClose }: { open: boolean; onClos
 
           {/* Progress + Nav */}
           <div className="px-5 pb-4">
-            {/* Progress bar */}
             <div className="flex gap-0.5 mb-4">
               {CROSS_ROLE_STEPS.map((s, i) => {
-                const isComprador = !s.role ? (CROSS_ROLE_STEPS.slice(0, i + 1).reverse().find(ss => ss.role)?.role || 'comprador') === 'comprador' : s.role === 'comprador'
+                const isComprador = !s.role
+                  ? (CROSS_ROLE_STEPS.slice(0, i + 1).reverse().find(ss => ss.role)?.role || 'comprador') === 'comprador'
+                  : s.role === 'comprador'
                 return (
                   <div
                     key={i}
