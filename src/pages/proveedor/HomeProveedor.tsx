@@ -51,12 +51,12 @@ export default function HomeProveedor() {
 
       <div className="px-6 pb-10">
         {/* Greeting */}
-        <h1 className="font-sans text-xl font-semibold text-text-primary italic mb-6">
+        <h1 data-tour="greeting" className="font-sans text-xl font-semibold text-text-primary italic mb-6">
           Bienvenido, {user?.name}
         </h1>
 
         {/* Banner */}
-        <div className="relative rounded-lg overflow-hidden mb-4">
+        <div data-tour="banner" className="relative rounded-lg overflow-hidden mb-4">
           <img
             src="https://images.pexels.com/photos/2199293/pexels-photo-2199293.jpeg?auto=compress&cs=tinysrgb&w=1200"
             alt="Banner Proveedor"
@@ -83,7 +83,7 @@ export default function HomeProveedor() {
         </div>
 
         {/* Quick Actions */}
-        <div className="flex justify-center gap-8 mb-10">
+        <div data-tour="quick-actions" className="flex justify-center gap-8 mb-10">
           {quickActions.map((action) => (
             <button
               key={action.label}
@@ -102,7 +102,7 @@ export default function HomeProveedor() {
 
         {/* Solicitudes */}
         <h2 className="font-sans text-lg font-bold text-text-primary mb-4">Solicitudes</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10">
+        <div data-tour="solicitudes" className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10">
           {solicitudCards.map((card) => (
             <div
               key={card.title}
@@ -127,7 +127,7 @@ export default function HomeProveedor() {
 
         {/* Mi cuenta */}
         <h2 className="font-sans text-lg font-bold text-text-primary mb-4">Mi cuenta</h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+        <div data-tour="mi-cuenta" className="grid grid-cols-1 md:grid-cols-3 gap-5">
           {accountCards.map((card) => (
             <div
               key={card.title}

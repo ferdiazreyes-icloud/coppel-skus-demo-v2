@@ -61,7 +61,7 @@ export default function Navbar() {
         </button>
 
         {/* Notifications */}
-        <div className="relative" ref={panelRef}>
+        <div data-tour="notifications" className="relative" ref={panelRef}>
           <button
             onClick={() => setShowNotifs(!showNotifs)}
             className="flex items-center gap-2 text-white hover:text-coppel-yellow transition-colors relative"
@@ -137,6 +137,7 @@ export default function Navbar() {
 
         {/* User */}
         <button
+          data-tour="user-avatar"
           onClick={handleLogout}
           className="flex items-center gap-2 text-white hover:text-coppel-yellow transition-colors"
         >

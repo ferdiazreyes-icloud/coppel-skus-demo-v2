@@ -46,12 +46,12 @@ export default function HomeComprador() {
 
       <div className="px-6 pb-10">
         {/* Greeting */}
-        <h1 className="font-sans text-xl font-semibold text-text-primary italic mb-6">
+        <h1 data-tour="greeting" className="font-sans text-xl font-semibold text-text-primary italic mb-6">
           Bienvenida, {user?.name}
         </h1>
 
         {/* Banner Carousel */}
-        <div className="relative rounded-lg overflow-hidden mb-4">
+        <div data-tour="banner" className="relative rounded-lg overflow-hidden mb-4">
           <img
             src={bannerImages[0]}
             alt="Banner Coppel"
@@ -79,7 +79,7 @@ export default function HomeComprador() {
         </div>
 
         {/* Quick Actions */}
-        <div className="flex justify-center gap-8 mb-10">
+        <div data-tour="quick-actions" className="flex justify-center gap-8 mb-10">
           {quickActions.map((action) => (
             <button
               key={action.label}
@@ -97,7 +97,7 @@ export default function HomeComprador() {
         </div>
 
         {/* Feature Cards */}
-        <div className="relative">
+        <div data-tour="feature-cards" className="relative">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {featureCards.map((card) => (
               <div

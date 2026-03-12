@@ -1,7 +1,10 @@
 import { useState } from 'react'
 import { HelpCircle, X, ShoppingCart, Truck, ArrowLeftRight } from 'lucide-react'
+import { useAuthStore } from '../../stores/useAuthStore'
 import { useTourStore, type TourId } from '../../stores/useTourStore'
+import { COMPRADOR_HOME_STEPS, PROVEEDOR_HOME_STEPS } from '../../data/spotlightSteps'
 import { ALL_TOURS } from '../../data/tourSteps'
+import SpotlightTour from './SpotlightTour'
 
 const tourIcons: Record<TourId, typeof ShoppingCart> = {
   comprador: ShoppingCart,
@@ -17,14 +20,44 @@ const tourColors: Record<TourId, string> = {
 
 export default function TourLauncher() {
   const [open, setOpen] = useState(false)
+  const [spotlightTour, setSpotlightTour] = useState<TourId | null>(null)
   const { startTour, activeTour, hasCompleted } = useTourStore()
+  const role = useAuthStore((s) => s.role)
 
-  if (activeTour) return null
+  if (activeTour || spotlightTour) {
+    // Show spotlight tour if active
+    if (spotlightTour) {
+      const steps = spotlightTour === 'comprador' ? COMPRADOR_HOME_STEPS : PROVEEDOR_HOME_STEPS
+      return (
+        <SpotlightTour
+          steps={steps}
+          open
+          onClose={() => setSpotlightTour(null)}
+          tourName={spotlightTour === 'comprador' ? 'Tour Comprador' : 'Tour Proveedor'}
+        />
+      )
+    }
+    // Slideshow handles its own rendering via TourSlideshow in PageLayout
+    return null
+  }
 
   const handleStart = (id: TourId) => {
     setOpen(false)
-    startTour(id)
+    if (id === 'crossRole') {
+      // Cross-role uses slideshow
+      startTour(id)
+    } else {
+      // Role tours use spotlight
+      setSpotlightTour(id)
+    }
   }
+
+  // Build available tours based on current role
+  const availableTours = ALL_TOURS.filter((t) => {
+    if (t.id === 'crossRole') return true
+    if (t.id === role) return true
+    return false
+  })
 
   return (
     <div className="fixed bottom-6 right-6 z-50">
@@ -41,7 +74,7 @@ export default function TourLauncher() {
           </div>
 
           <div className="p-2">
-            {ALL_TOURS.map((tour) => {
+            {availableTours.map((tour) => {
               const Icon = tourIcons[tour.id]
               const completed = hasCompleted(tour.id)
               return (
