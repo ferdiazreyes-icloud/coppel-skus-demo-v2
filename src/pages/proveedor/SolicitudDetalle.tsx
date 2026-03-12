@@ -11,10 +11,10 @@ const MOCK_DOCS = [
 ]
 
 const MOCK_IMAGES = [
-  'https://placehold.co/120x120/f1f4fa/081754?text=Ref+1',
-  'https://placehold.co/120x120/f1f4fa/081754?text=Ref+2',
-  'https://placehold.co/120x120/f1f4fa/081754?text=Ref+3',
-  'https://placehold.co/120x120/f1f4fa/081754?text=Ref+4',
+  'https://shop.mattel.com/cdn/shop/files/784568611a6a51f51918dc4cb1dc175e52a2bb7d_b924277b-ca4a-44a4-bf21-175f0261ac5d.jpg?v=1736787185',
+  'https://shop.mattel.com/cdn/shop/files/fw6cf2schrhqje1pqfzj.jpg?v=1751045162',
+  'https://shop.mattel.com/cdn/shop/files/oz3iehxa0qpel57prolu.jpg?v=1751045157',
+  'https://shop.mattel.com/cdn/shop/files/rcnqr5v1jim333xqvhdi.jpg?v=1736448104',
 ]
 
 export default function SolicitudDetalle() {

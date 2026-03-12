@@ -12,20 +12,21 @@ const quickActions = [
   { icon: BookOpen, label: 'Catálogos', to: '#' },
   { icon: FileText, label: 'Mis solicitudes', to: '/proveedor/solicitudes' },
   { icon: FolderOpen, label: 'Documentos', to: '#' },
+  { icon: Package, label: 'Mis productos', to: '#' },
 ]
 
 const solicitudCards = [
   {
-    image: 'https://placehold.co/400x200/e8edfa/1A3C9E?text=Solicitud',
+    image: 'https://images.pexels.com/photos/5156696/pexels-photo-5156696.jpeg?auto=compress&cs=tinysrgb&w=600',
     title: 'Nueva solicitud',
-    description: 'Envía tus propuestas al compra...',
+    description: 'Envía tus propuestas al comprador',
     buttonLabel: 'Enviar solicitud',
     to: '/proveedor/solicitudes',
   },
   {
-    image: 'https://placehold.co/400x200/e8edfa/1A3C9E?text=Historial',
+    image: 'https://images.pexels.com/photos/6248988/pexels-photo-6248988.jpeg?auto=compress&cs=tinysrgb&w=600',
     title: 'Historial de solicitudes',
-    description: 'Verifica el estatus de tus registr...',
+    description: 'Verifica el estatus de tus registros',
     buttonLabel: 'Ver historial',
     to: '/proveedor/solicitudes',
   },
@@ -57,10 +58,20 @@ export default function HomeProveedor() {
         {/* Banner */}
         <div className="relative rounded-lg overflow-hidden mb-4">
           <img
-            src="https://placehold.co/900x250/1A3C9E/ffffff?text=Descubre+los+beneficios+de+ser+proveedor+Coppel"
+            src="https://images.pexels.com/photos/2199293/pexels-photo-2199293.jpeg?auto=compress&cs=tinysrgb&w=1200"
             alt="Banner Proveedor"
             className="w-full h-[220px] object-cover"
           />
+          <div className="absolute inset-0 bg-gradient-to-r from-coppel-navy/80 to-transparent flex items-center px-12">
+            <div>
+              <h2 className="font-sans text-2xl font-bold text-white leading-tight">
+                Bienvenido al Sistema de<br />Gestión de Categorías
+              </h2>
+              <p className="text-white/90 text-sm mt-2 max-w-sm">
+                Descubre los beneficios de ser proveedor Coppel
+              </p>
+            </div>
+          </div>
         </div>
 
         {/* Dots */}

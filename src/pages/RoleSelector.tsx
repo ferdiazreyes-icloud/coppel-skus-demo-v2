@@ -1,5 +1,4 @@
 import { useNavigate } from 'react-router-dom'
-import { ShoppingCart, Truck } from 'lucide-react'
 import { useAuthStore } from '../stores/useAuthStore'
 import CoppelLogo from '../components/ui/CoppelLogo'
 
@@ -34,17 +33,23 @@ export default function RoleSelector() {
             onClick={() => handleSelect('comprador')}
             className="bg-bg-card rounded-md p-8 border-2 border-border hover:border-coppel-blue hover:shadow-lg transition-all cursor-pointer text-left group"
           >
-            <div className="w-16 h-16 rounded-lg bg-coppel-blue-light flex items-center justify-center mb-6 group-hover:bg-coppel-blue transition-colors">
-              <ShoppingCart className="w-8 h-8 text-coppel-blue group-hover:text-white transition-colors" />
+            <div className="flex items-center gap-4 mb-6">
+              <img
+                src="https://images.pexels.com/photos/3760514/pexels-photo-3760514.jpeg?auto=compress&cs=tinysrgb&w=100"
+                alt="Juanita Solis"
+                className="w-16 h-16 rounded-full object-cover border-3 border-coppel-blue-light group-hover:border-coppel-blue transition-colors"
+              />
+              <div>
+                <h2 className="font-sans text-xl font-semibold text-coppel-navy">
+                  Comprador
+                </h2>
+                <p className="text-text-muted text-xs">
+                  Juanita Solis
+                </p>
+              </div>
             </div>
-            <h2 className="font-sans text-xl font-semibold text-coppel-navy mb-2">
-              Comprador
-            </h2>
             <p className="text-text-secondary text-sm leading-relaxed">
               Evalúa propuestas, solicita muestras, da de alta SKU's y gestiona proveedores.
-            </p>
-            <p className="text-text-muted text-xs mt-4">
-              Usuario: Juanita Solis
             </p>
           </button>
 
@@ -53,17 +58,23 @@ export default function RoleSelector() {
             onClick={() => handleSelect('proveedor')}
             className="bg-bg-card rounded-md p-8 border-2 border-border hover:border-coppel-blue hover:shadow-lg transition-all cursor-pointer text-left group"
           >
-            <div className="w-16 h-16 rounded-lg bg-coppel-blue-light flex items-center justify-center mb-6 group-hover:bg-coppel-blue transition-colors">
-              <Truck className="w-8 h-8 text-coppel-blue group-hover:text-white transition-colors" />
+            <div className="flex items-center gap-4 mb-6">
+              <img
+                src="https://images.pexels.com/photos/7841788/pexels-photo-7841788.jpeg?auto=compress&cs=tinysrgb&w=100"
+                alt="Felipe López"
+                className="w-16 h-16 rounded-full object-cover border-3 border-coppel-blue-light group-hover:border-coppel-blue transition-colors"
+              />
+              <div>
+                <h2 className="font-sans text-xl font-semibold text-coppel-navy">
+                  Proveedor
+                </h2>
+                <p className="text-text-muted text-xs">
+                  Felipe López — Mattel S.A. de C.V.
+                </p>
+              </div>
             </div>
-            <h2 className="font-sans text-xl font-semibold text-coppel-navy mb-2">
-              Proveedor
-            </h2>
             <p className="text-text-secondary text-sm leading-relaxed">
               Envía propuestas de productos, llena fichas técnicas y complementa información de SKU's.
-            </p>
-            <p className="text-text-muted text-xs mt-4">
-              Usuario: Felipe López — Mattel S.A. de C.V.
             </p>
           </button>
         </div>

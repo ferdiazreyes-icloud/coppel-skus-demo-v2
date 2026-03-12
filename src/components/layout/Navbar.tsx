@@ -142,9 +142,17 @@ export default function Navbar() {
         >
           {user && (
             <>
-              <div className="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center">
-                <span className="text-sm font-medium text-white">{user.initials}</span>
-              </div>
+              {user.avatar ? (
+                <img
+                  src={user.avatar}
+                  alt={user.name}
+                  className="w-10 h-10 rounded-full object-cover border-2 border-white/30"
+                />
+              ) : (
+                <div className="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center">
+                  <span className="text-sm font-medium text-white">{user.initials}</span>
+                </div>
+              )}
               <span className="text-sm hidden sm:inline">{user.name}</span>
             </>
           )}

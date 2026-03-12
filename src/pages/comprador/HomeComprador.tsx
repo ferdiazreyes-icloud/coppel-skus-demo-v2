@@ -4,7 +4,7 @@ import { useAuthStore } from '../../stores/useAuthStore'
 import Breadcrumb from '../../components/layout/Breadcrumb'
 
 const bannerImages = [
-  'https://placehold.co/900x300/1A3C9E/F5C518?text=Coppel+Proveedores',
+  'https://images.pexels.com/photos/2199293/pexels-photo-2199293.jpeg?auto=compress&cs=tinysrgb&w=1200',
 ]
 
 const quickActions = [
@@ -14,21 +14,21 @@ const quickActions = [
 
 const featureCards = [
   {
-    image: 'https://placehold.co/400x200/e8edfa/1A3C9E?text=Almacen',
+    image: 'https://images.pexels.com/photos/4483608/pexels-photo-4483608.jpeg?auto=compress&cs=tinysrgb&w=600',
     title: 'Generar Invitación',
     description: 'Invita prospectos a registrarse',
     buttonLabel: 'Generar QR',
     to: '#',
   },
   {
-    image: 'https://placehold.co/400x200/e8edfa/1A3C9E?text=Prospectos',
+    image: 'https://images.pexels.com/photos/6169659/pexels-photo-6169659.jpeg?auto=compress&cs=tinysrgb&w=600',
     title: 'Alta prospectos',
     description: 'Gestión completa de prospectos',
     buttonLabel: 'Ir a listado de prospectos',
     to: '#',
   },
   {
-    image: 'https://placehold.co/400x200/e8edfa/1A3C9E?text=SKUs',
+    image: 'https://images.pexels.com/photos/7163395/pexels-photo-7163395.jpeg?auto=compress&cs=tinysrgb&w=600',
     title: 'Propuestas y SKU\'s',
     description: 'Revisa y gestiona tus propuestas...',
     buttonLabel: 'Ver propuestas y SKU\'s',
@@ -57,6 +57,16 @@ export default function HomeComprador() {
             alt="Banner Coppel"
             className="w-full h-[250px] object-cover"
           />
+          <div className="absolute inset-0 bg-gradient-to-r from-coppel-blue/70 to-transparent flex items-center px-12">
+            <div>
+              <h2 className="font-sans text-2xl font-bold text-white leading-tight">
+                Portal de Proveedores
+              </h2>
+              <p className="text-white/90 text-sm mt-2 max-w-sm">
+                Gestiona propuestas, SKU&apos;s y proveedores en un solo lugar
+              </p>
+            </div>
+          </div>
         </div>
 
         {/* Carousel dots */}

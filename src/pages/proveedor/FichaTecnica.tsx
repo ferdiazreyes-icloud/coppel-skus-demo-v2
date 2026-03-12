@@ -180,14 +180,14 @@ export default function FichaTecnica() {
                 className="w-28 h-28 rounded-md object-cover border border-border"
               />
               <img
-                src={`https://placehold.co/120x120/f1f4fa/081754?text=${product.brand}`}
+                src={product.imageUrl}
                 alt="Ángulo 2"
-                className="w-28 h-28 rounded-md object-cover border border-border"
+                className="w-28 h-28 rounded-md object-cover border border-border scale-x-[-1]"
               />
               <img
-                src={`https://placehold.co/120x120/f1f4fa/081754?text=Detalle`}
+                src={product.imageUrl}
                 alt="Detalle"
-                className="w-28 h-28 rounded-md object-cover border border-border"
+                className="w-28 h-28 rounded-md object-cover border border-border brightness-105 saturate-110"
               />
             </div>
           </div>
