@@ -2,7 +2,7 @@
 
 > Demo funcional del portal SGC (Sistema de Gestión Comercial) de Coppel para gestionar propuestas y alta de SKU's entre compradores internos y proveedores externos.
 
-**Version:** 1.4.0 (Sprints 0–11 complete)
+**Version:** 1.5.0 (Sprints 0–12 complete)
 **Live demo:** [coppel-skus-demo-v2-production.up.railway.app](https://coppel-skus-demo-v2-production.up.railway.app)
 **Figma reference:** [SKU's_SGC](https://www.figma.com/design/gYTM6PwHzQPGycic3kdIE6/SKU-s_SGC)
 
@@ -127,6 +127,13 @@
 - [x] Updated `SKU_TABS` from 8 → 10 tabs, updated `SkuFormData` type
 - [x] `AltaSkuLayout` updated with new tab components
 
+### Sprint 12: Propuestas y SKU's Hub + SKU Listing
+- [x] **PropuestasYSkus** — Intermediate hub page with 5 navigation cards: Bandeja de solicitudes, Catálogo de propuestas, Seguimiento muestras, Propuestas en proceso de alta, SKU's
+- [x] **SkusListado** — Full SKU listing page with category tabs (Juguetes, Bebés, Consolas), sortable table with columns: Imagen, Tipo artículo, SKU, Estatus (Línea/Descontinuado badges), C/NC, Comprar, Canal, Proveedor, Fecha alta, Artículo, Marca, Modelo, Pedido
+- [x] New routes: `/comprador/propuestas-skus` (hub), `/comprador/skus` (SKU listing)
+- [x] HomeComprador quick actions and feature cards now navigate to hub page
+- [x] Pagination on SKU listing table
+
 ### Known Limitations
 - Sidebar filters in ListadoPropuestas are visual only (no actual filtering)
 - Form data in SKU tabs is not persisted to mock backend
@@ -140,10 +147,12 @@
 |-------|------|------|
 | `/` | RoleSelector | — |
 | `/comprador` | HomeComprador | Comprador |
+| `/comprador/propuestas-skus` | PropuestasYSkus (hub) | Comprador |
 | `/comprador/propuestas/:proveedorId` | ListadoPropuestas | Comprador |
 | `/comprador/propuestas/:proveedorId/:productoId/evaluar` | EvaluacionPropuesta | Comprador |
 | `/comprador/alta-skus` | PropuestasEnAlta | Comprador |
 | `/comprador/alta-skus/:productoId/:tab` | AltaSkuLayout (10 tabs) | Comprador |
+| `/comprador/skus` | SkusListado | Comprador |
 | `/proveedor` | HomeProveedor | Proveedor |
 | `/proveedor/solicitudes` | HistorialSolicitudes | Proveedor |
 | `/proveedor/solicitudes/:solicitudId` | SolicitudDetalle | Proveedor |

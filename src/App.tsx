@@ -4,8 +4,10 @@ import RoleSelector from './pages/RoleSelector'
 import HomeComprador from './pages/comprador/HomeComprador'
 import ListadoPropuestas from './pages/comprador/ListadoPropuestas'
 import EvaluacionPropuesta from './pages/comprador/EvaluacionPropuesta'
+import PropuestasYSkus from './pages/comprador/PropuestasYSkus'
 import PropuestasEnAlta from './pages/comprador/PropuestasEnAlta'
 import AltaSkuLayout from './pages/comprador/AltaSkuLayout'
+import SkusListado from './pages/comprador/SkusListado'
 import HomeProveedor from './pages/proveedor/HomeProveedor'
 import HistorialSolicitudes from './pages/proveedor/HistorialSolicitudes'
 import SolicitudDetalle from './pages/proveedor/SolicitudDetalle'
@@ -23,10 +25,12 @@ export default function App() {
         {/* Comprador Routes */}
         <Route element={<PageLayout />}>
           <Route path="/comprador" element={<HomeComprador />} />
+          <Route path="/comprador/propuestas-skus" element={<PropuestasYSkus />} />
           <Route path="/comprador/propuestas/:proveedorId" element={<ListadoPropuestas />} />
           <Route path="/comprador/propuestas/:proveedorId/:productoId/evaluar" element={<EvaluacionPropuesta />} />
           <Route path="/comprador/alta-skus" element={<PropuestasEnAlta />} />
           <Route path="/comprador/alta-skus/:productoId/:tab" element={<AltaSkuLayout />} />
+          <Route path="/comprador/skus" element={<SkusListado />} />
         </Route>
 
         {/* Proveedor Routes */}

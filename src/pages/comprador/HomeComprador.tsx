@@ -8,7 +8,7 @@ const bannerImages = [
 ]
 
 const quickActions = [
-  { icon: Lock, label: 'Propuestas de\nSKU\'s', to: '/comprador/propuestas/sup-001' },
+  { icon: Lock, label: 'Propuestas de\nSKU\'s', to: '/comprador/propuestas-skus' },
   { icon: Truck, label: 'Alta de\nproveedores', to: '/comprador/alta-skus' },
 ]
 
@@ -32,7 +32,7 @@ const featureCards = [
     title: 'Propuestas y SKU\'s',
     description: 'Revisa y gestiona tus propuestas...',
     buttonLabel: 'Ver propuestas y SKU\'s',
-    to: '/comprador/propuestas/sup-001',
+    to: '/comprador/propuestas-skus',
   },
 ]
 
